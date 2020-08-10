@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   
   <groupId>org.openjfx</groupId>
-  <artifactId>hellofx</artifactId>
+  <artifactId>donotforget</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
@@ -13,7 +13,7 @@
         <javafx.version>13</javafx.version>
     </properties>
 
-  <name>hellofx</name>
+  <name>donotforget</name>
   
   <dependencies>
     <dependency>
@@ -43,49 +43,67 @@
     </dependency>
     -->
   </dependencies>
-  
-  <build>
-      <plugins>
-          <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-compiler-plugin</artifactId>
-              <version>3.8.1</version>
-              <configuration>
-                  <release>${maven.compiler.release}</release>
-              </configuration>
-          </plugin>
-          <plugin>
-              <groupId>org.openjfx</groupId>
-              <artifactId>javafx-maven-plugin</artifactId>
-              <version>0.0.3</version>
-              <configuration>
-                  <mainClass>donotforget.ui.Main</mainClass>
-              </configuration>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-shade-plugin</artifactId>
-            <version>3.2.0</version>
+
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <version>3.0.0</version>
             <executions>
                 <execution>
-                    <phase>package</phase>
+                    <phase>generate-sources</phase>
                     <goals>
-                        <goal>shade</goal>
+                        <goal>add-source</goal>
                     </goals>
                     <configuration>
-                        <shadedArtifactAttached>true</shadedArtifactAttached>
-                        <shadedClassifierName>project-classifier</shadedClassifierName>
-                        <outputFile>shade\${project.artifactId}.jar</outputFile>
-                        <transformers>
-                            <transformer implementation=
-                                                 "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                <mainClass>donotforget.ui.Launcher</mainClass>
-                            </transformer>
-                        </transformers>
+                        <sources>
+                            <source>src\main\java</source>
+                        </sources>
                     </configuration>
                 </execution>
             </executions>
+	    </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version>
+            <configuration>
+                <release>${maven.compiler.release}</release>
+            </configuration>
         </plugin>
+        <plugin>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-maven-plugin</artifactId>
+            <version>0.0.3</version>
+            <configuration>
+                <mainClass>donotforget.ui.Main</mainClass>
+            </configuration>
+        </plugin>
+        <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions>
+            <execution>
+                <phase>package</phase>
+                <goals>
+                    <goal>shade</goal>
+                </goals>
+                <configuration>
+                    <shadedArtifactAttached>true</shadedArtifactAttached>
+                    <shadedClassifierName>project-classifier</shadedClassifierName>
+                    <outputFile>shade\${project.artifactId}.jar</outputFile>
+                    <transformers>
+                        <transformer implementation=
+                                                "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                            <mainClass>donotforget.ui.Launcher</mainClass>
+                        </transformer>
+                    </transformers>
+                </configuration>
+            </execution>
+        </executions>
+    </plugin>
     </plugins>
   </build>
 </project>
