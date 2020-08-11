@@ -21,8 +21,7 @@
       <artifactId>javafx-controls</artifactId>
       <version>${javafx.version}</version>
     </dependency>
-    <!-- Uncomment for cross-platform fat jar-->
-    <!--
+    
       <dependency>
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-graphics</artifactId>
@@ -41,7 +40,7 @@
         <version>${javafx.version}</version>
         <classifier>mac</classifier>
     </dependency>
-    -->
+
   </dependencies>
 
 <build>
