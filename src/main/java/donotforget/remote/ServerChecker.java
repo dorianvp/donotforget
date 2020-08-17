@@ -8,7 +8,6 @@ public class ServerChecker extends UnicastRemoteObject implements Checker {
 
     public ServerChecker() throws RemoteException {
         super();
-
     }
 
     @Override
