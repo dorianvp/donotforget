@@ -1,4 +1,4 @@
-package donotforget.core;
+package donotforget.server;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
