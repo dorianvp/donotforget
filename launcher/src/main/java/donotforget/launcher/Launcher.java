@@ -1,6 +1,12 @@
 package donotforget.launcher;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -8,11 +14,13 @@ import java.rmi.registry.Registry;
 
 public class Launcher {
     public static void main(String[] args) {
+        startClient();
+        /* 
         if(isServerRunning()) {
             startClient();
         } else {
             startServer();
-        }
+        } */
     }
 
     private static boolean isServerRunning() {
@@ -44,11 +52,54 @@ public class Launcher {
 
     private static void startClient() {
         try {
-            Runtime.getRuntime().exec("java -jar client.jar");
-            System.out.println("Starting client...");
+            Path p = Paths.get(Launcher.class.getProtectionDomain().getCodeSource().getLocation()
+            .toURI());
+            System.out.println(p.getParent().toString());
+            Process proc = Runtime.getRuntime().exec("java -jar " + p.getParent() + "\\Client.jar");
+            StreamGobbler errorGobbler = new 
+                StreamGobbler(proc.getErrorStream(), "ERROR");            
+            
+            // any output?
+            StreamGobbler outputGobbler = new 
+                StreamGobbler(proc.getInputStream(), "OUTPUT");
+                
+            // kick them off
+            errorGobbler.start();
+            outputGobbler.start();
+
+
         } catch (IOException ioe) {
             System.out.println("Cannot start client.jar");
             System.out.println("Error: " + ioe);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
         }
+    }
+}
+
+class StreamGobbler extends Thread
+{
+    InputStream is;
+    String type;
+    
+    StreamGobbler(InputStream is, String type)
+    {
+        this.is = is;
+        this.type = type;
+    }
+    
+    public void run()
+    {
+        try
+        {
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader br = new BufferedReader(isr);
+            String line=null;
+            while ( (line = br.readLine()) != null)
+                System.out.println(type + ">" + line);    
+            } catch (IOException ioe)
+              {
+                ioe.printStackTrace();  
+              }
     }
 }
