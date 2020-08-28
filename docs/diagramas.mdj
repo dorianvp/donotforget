@@ -439,13 +439,30 @@
 											"underline": true,
 											"text": "-startRmiRegistry(): boolean",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAF0MkAJsZtN5+k=",
+											"_parent": {
+												"$ref": "AAAAAAFz7WZAdbLIqd0="
+											},
+											"model": {
+												"$ref": "AAAAAAF0MkAJfJtKKqk="
+											},
+											"font": "Arial;13;0",
+											"left": 789,
+											"top": 358,
+											"width": 165.80712890625,
+											"height": 13,
+											"text": "-fileExists(): boolean",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 784,
 									"top": 323,
 									"width": 175.80712890625,
-									"height": 38
+									"height": 53
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -485,7 +502,7 @@
 							"left": 784,
 							"top": 288,
 							"width": 175.80712890625,
-							"height": 73,
+							"height": 88,
 							"nameCompartment": {
 								"$ref": "AAAAAAFz7WZAdbLCeIw="
 							},
@@ -1064,6 +1081,26 @@
 									"_id": "AAAAAAFz+Gzsh3UqBNk=",
 									"_parent": {
 										"$ref": "AAAAAAFz+Gy/5HUj/TQ="
+									},
+									"type": "boolean",
+									"direction": "return"
+								}
+							]
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAF0MkAJfJtKKqk=",
+							"_parent": {
+								"$ref": "AAAAAAFz7WZAdLK/+Ew="
+							},
+							"name": "fileExists",
+							"visibility": "private",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAF0MkA/xZtRsm4=",
+									"_parent": {
+										"$ref": "AAAAAAF0MkAJfJtKKqk="
 									},
 									"type": "boolean",
 									"direction": "return"
