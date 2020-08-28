@@ -20,7 +20,7 @@
 
 	<!-- password info -->
     <groupId>donotforget.client</groupId>
-    <artifactId>donotforget.client</artifactId>
+    <artifactId>client</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 

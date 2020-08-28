@@ -5,12 +5,21 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.io.File;
+
 
 import donotforget.remote.ServerChecker;
 
 public class ServerMain {
     public static void main(String[] args) {
+        
+        
         ServerMain sm = new ServerMain();
+        if(fileExists()) {
+            System.out.println("DB Exists");
+        } else {
+            System.out.println("Db Does not Exist");
+        }
 
         sm.startRmiServer();
         try {
@@ -27,15 +36,14 @@ public class ServerMain {
         } catch (RemoteException re) {
             System.out.println("Cannot create registry.");
             System.out.println("Error: " + re);
-        }
-        
+        }        
     }
 
     public static boolean fileExists() {
         try {
             Path p = Paths.get(ServerMain.class.getProtectionDomain().getCodeSource().getLocation()
             .toURI());
-            File f = new File(p.getParent().toString());
+            File f = new File(p.getParent().toString() + "\\local.db");
             if(f.isFile()) {
                 return true;
             }
