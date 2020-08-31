@@ -6,6 +6,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.File;
+import java.sql.*;
 
 
 import donotforget.remote.ServerChecker;
@@ -28,6 +29,9 @@ public class ServerMain {
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
+
+
+
     }
 
     public void startRmiServer() {
@@ -51,6 +55,16 @@ public class ServerMain {
             System.out.println("Error: " + e);
         }
         return false;
+    }
+
+    private static void initDatabase() {
+        try {
+            Connection c;
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:local.db");
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
     }
 
 }

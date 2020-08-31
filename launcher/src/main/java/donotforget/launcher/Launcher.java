@@ -39,12 +39,29 @@ public class Launcher {
 
     private static boolean startServer() {
         try {
-            Runtime.getRuntime().exec("java -jar server.jar");
-            System.out.println("Starting server...");
+        
+            Path p = Paths.get(Launcher.class.getProtectionDomain().getCodeSource().getLocation()
+            .toURI());
+            System.out.println(p.getParent().toString());
+            Process proc = Runtime.getRuntime().exec("java -jar " + p.getParent() + "\\server-1.0.jar");
+            StreamGobbler errorGobbler = new 
+                StreamGobbler(proc.getErrorStream(), "ERROR");            
+            
+            // any output?
+            StreamGobbler outputGobbler = new 
+                StreamGobbler(proc.getInputStream(), "OUTPUT");
+                
+            // kick them off
+            errorGobbler.start();
+            outputGobbler.start();
+
+    
         } catch (IOException ioe) {
             System.out.println("Cannot start server.jar");
             System.out.println("Error: " + ioe);
             return false;
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
         }
         return true;
     }

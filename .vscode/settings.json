@@ -1,4 +1,5 @@
 {
     "java.dependency.packagePresentation": "flat",
-    "java.dependency.syncWithFolderExplorer": true
+    "java.dependency.syncWithFolderExplorer": true,
+    "java.configuration.updateBuildConfiguration": "automatic"
 }
