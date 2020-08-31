@@ -25,9 +25,18 @@ git checkout -b development
 
 ### Aplicando cambios al módulo remote:
 ```console
-mvn -pl remote install
+mvn [-U] clean install
 ```
 
 ### Aplicando cambios a los demás módulos:
 ```console
 mvn -pl <nombre_de _modulo> compile package
+```
+
+## Módulos
+
+El proyecto posee 4 módulos: 
+* client: Contiene la interfaz gráfica.
+* server: Contiene el servidor, y se encarga de administrar la base de datos.
+* remote: Interfaces para la comunicacion a traves de RMI.
+* launcher: Se encarga de iniciar los módulos de forma correcta, verificando el estado de cada uno.

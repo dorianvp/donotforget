@@ -1,6 +1,5 @@
 {
-    "java.dependency.packagePresentation": "hierarchical",
+    "java.dependency.packagePresentation": "flat",
     "java.dependency.syncWithFolderExplorer": true,
-    "java.refactor.renameFromFileExplorer": "never",
     "java.configuration.updateBuildConfiguration": "automatic"
 }
