@@ -30,7 +30,8 @@
                             <mainClass>donotforget.launcher.Launcher</mainClass>
                         </manifest>
                     </archive>
-				</configuration>
+                    <finalName>Launcher</finalName>
+                </configuration>
 			</plugin>
 
 		</plugins>

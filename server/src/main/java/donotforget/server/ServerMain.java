@@ -1,5 +1,6 @@
 package donotforget.server;
 
+import java.rmi.registry.Registry;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
@@ -10,12 +11,21 @@ import java.sql.*;
 
 
 import donotforget.remote.ServerChecker;
+import donotforget.remote.Checker;
 
 public class ServerMain {
+    private Registry r;
+    private final static int PORT = 1099;
     public static void main(String[] args) {
         
-        
         ServerMain sm = new ServerMain();
+
+        try {
+            sm.stopRmiRegistry();
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+
         if(fileExists()) {
             System.out.println("DB Exists");
         } else {
@@ -25,22 +35,33 @@ public class ServerMain {
         sm.startRmiServer();
         try {
             ServerChecker sc = new ServerChecker();
-            ServerMain stub = (ServerMain) UnicastRemoteObject.exportObject(sc, 1099);
+            //Checker stub = (Checker) UnicastRemoteObject.exportObject(sc, 1099);
+            // Binding the remote object (stub) in the registry 
+            sm.r = LocateRegistry.getRegistry(PORT); 
+            
+            sm.r.bind("checker", sc);  
+            System.out.println("Server ready"); 
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
-
-
-
+        sm.stopRmiRegistry();
     }
 
     public void startRmiServer() {
         try {
-            LocateRegistry.createRegistry(1099);
+            this.r = LocateRegistry.createRegistry(PORT);
         } catch (RemoteException re) {
             System.out.println("Cannot create registry.");
             System.out.println("Error: " + re);
         }        
+    }
+
+    public void stopRmiRegistry() {
+        try {
+            UnicastRemoteObject.unexportObject(this.r, true);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
     }
 
     public static boolean fileExists() {
