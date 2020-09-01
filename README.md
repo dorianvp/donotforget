@@ -23,7 +23,7 @@ Cambia a la branch development:
 git checkout -b development
 ```
 
-### Aplicando cambios al módulo remote:
+### Aplicando cambios a todos los módulos:
 ```console
 mvn [-U] clean install
 ```

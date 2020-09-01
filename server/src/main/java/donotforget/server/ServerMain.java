@@ -36,7 +36,7 @@ public class ServerMain {
         try {
             ServerChecker sc = new ServerChecker();
             //Checker stub = (Checker) UnicastRemoteObject.exportObject(sc, 1099);
-            // Binding the remote object (stub) in the registry 
+            // Solo si el objeto no extiende de UnicastRemoteObject
             sm.r = LocateRegistry.getRegistry(PORT); 
             
             sm.r.bind("checker", sc);  
