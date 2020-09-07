@@ -7,8 +7,12 @@ import java.rmi.server.UnicastRemoteObject;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.File;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
+import org.apache.ibatis.jdbc.ScriptRunner;
 
 import donotforget.remote.ServerChecker;
 import donotforget.remote.Checker;
@@ -94,6 +98,11 @@ public class ServerMain {
             Connection c;
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:local.db");
+
+            String statement = "CREATE TABLE IF NOT EXISTS Categoria (\n" +
+            "   id_categoria INTEGER PRIMARY KEY";
+
+
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
