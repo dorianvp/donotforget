@@ -16,52 +16,62 @@ import donotforget.remote.Checker;
 public class ServerMain {
     private Registry r;
     private final static int PORT = 1099;
-    public static void main(String[] args) {
-        
+
+    public static void main(String[] args) {   
         ServerMain sm = new ServerMain();
-
         try {
-            sm.stopRmiRegistry();
-        } catch (Exception e) {
-            System.out.println("Error: " + e);
-        }
 
-        if(fileExists()) {
-            System.out.println("DB Exists");
-        } else {
-            System.out.println("Db Does not Exist");
-        }
+            //inicio el registro e inicio base de datos si no existe
+            sm.startRmiServer();   
+            if(fileExists()) {
+                System.err.println("LOG> DB Exists");
+            } else {
+                System.err.println("LOG> DB Does not Exist");
+                //inicializar base de datos
+                initDatabase();
+            }
+            //Localizo el registro y bindeo checker
+            //asi el cliente se puede conectar
 
-        sm.startRmiServer();
-        try {
-            ServerChecker sc = new ServerChecker();
-            //Checker stub = (Checker) UnicastRemoteObject.exportObject(sc, 1099);
-            // Solo si el objeto no extiende de UnicastRemoteObject
-            sm.r = LocateRegistry.getRegistry(PORT); 
-            
-            sm.r.bind("checker", sc);  
-            System.out.println("Server ready"); 
+            try {
+                ServerChecker sc = new ServerChecker();
+                System.err.println("LOG> Bindeando sc a checker");
+                sm.r.bind("checker", sc);  
+                System.err.println("LOG> Server ready"); 
+            } catch (Exception e) {
+                System.err.println("ERROR: " + e);
+            }
+
         } catch (Exception e) {
-            System.out.println("Error: " + e);
+            System.err.println("ERROR: " + e);
         }
-        sm.stopRmiRegistry();
     }
 
     public void startRmiServer() {
         try {
+            System.err.println("LOG> Creando registro");
             this.r = LocateRegistry.createRegistry(PORT);
         } catch (RemoteException re) {
             System.out.println("Cannot create registry.");
-            System.out.println("Error: " + re);
+            System.out.println("ERROR: " + re);
         }        
     }
 
     public void stopRmiRegistry() {
-        try {
-            UnicastRemoteObject.unexportObject(this.r, true);
-        } catch (Exception e) {
-            System.out.println("Error: " + e);
+        if (this.r != null) {
+            try {
+                System.out.println("Unbind checker");
+                this.r.unbind("checker");
+                System.out.println("unexport this");
+                UnicastRemoteObject.unexportObject(this.r, true);
+            } catch (Exception e) {
+                System.out.println("Error: " + e);
+            } finally {
+                System.out.println("Ended");
+                System.exit(0);
+            }
         }
+        
     }
 
     public static boolean fileExists() {
@@ -80,6 +90,7 @@ public class ServerMain {
 
     private static void initDatabase() {
         try {
+            System.err.println("LOG> Inicializando la base de datos");
             Connection c;
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:local.db");
