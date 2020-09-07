@@ -1,5 +1,6 @@
 # donotforget
 
+![donotforget_home](./docs/Prototipo/Principal.png)
 
 ## Prerequisitos
 
@@ -32,6 +33,11 @@ mvn [-U] clean install
 ```console
 mvn -pl <nombre_de _modulo> compile package
 ```
+#### Esta forma de compilar no asegura que las dependencias de cada modulo sean incluidas. En caso de que no funcione, usa la de arriba.
+
+<br />
+<br />
+
 
 ## Módulos
 
