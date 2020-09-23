@@ -6,7 +6,11 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -23,8 +27,8 @@ public class ServerMain {
 
     public static void main(String[] args) {   
         ServerMain sm = new ServerMain();
-        try {
 
+        try {
             //inicio el registro e inicio base de datos si no existe
             sm.startRmiServer();   
             if(fileExists()) {
@@ -99,9 +103,14 @@ public class ServerMain {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:local.db");
 
-            String statement = "CREATE TABLE IF NOT EXISTS Categoria (\n" +
-            "   id_categoria INTEGER PRIMARY KEY";
+            InputStream in = ServerMain.class.getResourceAsStream("/schema.sql");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
+            ScriptRunner sr = new ScriptRunner(c);
+
+            // Sin esto, ScriptRunner hace la suicidación.
+            sr.setEscapeProcessing(false);
+            sr.runScript(reader);
 
         } catch (Exception e) {
             System.out.println("Error: " + e);
