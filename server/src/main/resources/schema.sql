@@ -15,7 +15,7 @@ CREATE TABLE Evento (
     id_categoria INTEGER, 
     FOREIGN KEY (id_categoria)
         REFERENCES Categoria (id_categoria),
-    titulo INTEGER,
+    titulo TEXT,
     descripcion TEXT,
     fecha_inicio TEXT,
     fecha_finalizacion TEXT,
