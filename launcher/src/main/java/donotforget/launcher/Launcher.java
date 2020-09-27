@@ -75,11 +75,9 @@ public class Launcher {
             StreamGobbler errorGobbler = new 
                 StreamGobbler(proc.getErrorStream(), "ERROR");            
             
-            // any output?
             StreamGobbler outputGobbler = new 
                 StreamGobbler(proc.getInputStream(), "OUTPUT");
                 
-            // kick them off
             errorGobbler.start();
             outputGobbler.start();
 
