@@ -23,7 +23,16 @@ CREATE TABLE Evento (
 );
 
 CREATE TABLE Recordatorio (
-
+    id_recordatorio INTEGER PRIMARY KEY,
+    id_categoria INTEGER,
+    FOREIGN KEY (id_categoria)
+        REFERENCES Categoria (id_categoria),
+    titulo TEXT,
+    descripcion TEXT,
+    fecha TEXT,
+    completado INTEGER,
+    repite_cada INTEGER,
+    duracion_del_aviso TEXT
 );
 
 CREATE TABLE Exclusion_Recordatorio_Dia ();
