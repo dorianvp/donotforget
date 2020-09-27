@@ -6,7 +6,7 @@ CREATE TABLE Categoria (
 );
 
 CREATE TABLE Dia (
-    id_dia INTEGER, 
+    id_dia INTEGER PRIMARY KEY, 
     dia TEXT
 );
 
@@ -35,4 +35,11 @@ CREATE TABLE Recordatorio (
     duracion_del_aviso TEXT
 );
 
-CREATE TABLE Exclusion_Recordatorio_Dia ();
+CREATE TABLE Exclusion_Recordatorio_Dia (
+    id_recordatorio INTEGER PRIMARY KEY,
+    FOREIGN KEY (id_recordatorio)
+        REFERENCES Recordatorio (id_recordatorio),
+    id_dia INTEGER PRIMARY KEY,
+    FOREIGN KEY (id_dia)
+        REFERENCES Dia (id_dia)
+);
