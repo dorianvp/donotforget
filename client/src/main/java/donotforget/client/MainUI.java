@@ -1,19 +1,54 @@
 package donotforget.client;
 
+import donotforget.layout.MainView;
+import donotforget.layout.Navigation;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
 
 public class MainUI extends Application {
 
+    private GridPane root = new GridPane();
+
     @Override
     public void start(Stage stage) {
-       
-        Scene scene = new Scene(new StackPane(), 640, 480);
-        stage.setScene(scene);
+        
+
+        Scene s = new Scene(this.root, 640, 480);
+        Color c = new Color(0, 1, 0, 1);
+        s.setFill(c);
+
+        Navigation n = new Navigation();
+        MainView mv = new MainView();
+
+        ColumnConstraints col1 = new ColumnConstraints();
+        col1.setPercentWidth(75);
+
+        ColumnConstraints col2 = new ColumnConstraints();
+        col2.setPercentWidth(25);
+
+        RowConstraints r1 = new RowConstraints();
+        r1.setPercentHeight(100);
+
+        root.getColumnConstraints().addAll(col1, col2);
+        root.getRowConstraints().addAll(r1);
+
+        root.add(mv, 0, 0);
+        root.add(n, 1, 0);
+
+
+        stage.setScene(s);
         stage.show();
+
     }
 
     public static void main(String[] args) {
