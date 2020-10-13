@@ -31,10 +31,10 @@ public class MainUI extends Application {
         MainView mv = new MainView();
 
         ColumnConstraints col1 = new ColumnConstraints();
-        col1.setPercentWidth(75);
+        col1.setPercentWidth(80);
 
         ColumnConstraints col2 = new ColumnConstraints();
-        col2.setPercentWidth(25);
+        col2.setPercentWidth(20);
 
         RowConstraints r1 = new RowConstraints();
         r1.setPercentHeight(100);
