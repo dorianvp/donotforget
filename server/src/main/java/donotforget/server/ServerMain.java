@@ -16,7 +16,6 @@ import java.sql.DriverManager;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
 import donotforget.remote.ServerChecker;
-import donotforget.remote.Checker;
 
 public class ServerMain {
     private Registry r;
