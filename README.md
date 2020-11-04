@@ -31,13 +31,32 @@ mvn [-U] clean install
 
 ### Aplicando cambios a los demás módulos:
 ```console
-mvn -pl <nombre_de _modulo> compile package
+mvn -pl <nombre_de _modulo> compile package install
 ```
 #### Esta forma de compilar no asegura que las dependencias de cada modulo sean incluidas. En caso de que no funcione, usa la de arriba.
 
 <br />
+
+### Aplicando cambios al archivo CSS dentro del modulo Client:
 <br />
 
+#### Necesitaras tener npm (Node.js) instalado y el preprocesador de CSS less. 
+
+<br />
+
+```console
+npm i less less-watch-compiler -g
+```
+
+#### Una vez instalado, corre el siguiente comando en la carpeta resources dentro de Client:
+
+<br />
+
+```console
+less-watch-compiler . . styles.less
+```
+
+<br />
 
 ## Módulos
 
