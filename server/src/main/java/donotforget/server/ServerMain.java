@@ -15,7 +15,9 @@ import java.sql.DriverManager;
 
 import org.apache.ibatis.jdbc.ScriptRunner;
 
+import donotforget.remote.Categorias;
 import donotforget.remote.ServerChecker;
+import donotforget.server.implementations.CategoriasServer;
 
 public class ServerMain {
     private Registry r;
@@ -107,6 +109,15 @@ public class ServerMain {
             // Sin esto, ScriptRunner hace la suicidación.
             sr.setEscapeProcessing(false);
             sr.runScript(reader);
+
+            CategoriasServer cs = new CategoriasServer();
+
+            Categorias cat = (Categorias) UnicastRemoteObject.exportObject(cs, 0);
+
+            Registry registry = LocateRegistry.getRegistry(); 
+         
+            registry.bind("Hello", cat);  
+            System.err.println("Binded categorias"); 
 
         } catch (Exception e) {
             System.out.println("Error: " + e);

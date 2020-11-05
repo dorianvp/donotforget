@@ -26,11 +26,19 @@
 
 
     <dependencies>
+        
         <dependency>
           <groupId>org.openjfx</groupId>
           <artifactId>javafx-controls</artifactId>
           <version>${javafx.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>donotforget.remote</groupId>
+            <artifactId>remote</artifactId>
+            <version>1.0</version>
+        </dependency>
+
     </dependencies>
       
     <build>
@@ -73,7 +81,7 @@
                                     <mainClass>donotforget.client.Launcher</mainClass>
                                 </transformer>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
-                                    <resource>src/main/resources</resource>
+                                    <resource>src/main/resources/styles.css</resource>
                                     <file>styles.css</file>
                                 </transformer>
                             </transformers>

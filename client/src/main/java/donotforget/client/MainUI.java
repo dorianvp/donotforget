@@ -4,12 +4,11 @@ import donotforget.layout.MainView;
 import donotforget.layout.Navigation;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.paint.Color;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
 
 public class MainUI extends Application {
 
@@ -17,7 +16,6 @@ public class MainUI extends Application {
 
     @Override
     public void start(Stage stage) {
-        
 
         Scene s = new Scene(this.root, 640, 480);
         Color c = new Color(0, 1, 0, 1);
@@ -41,6 +39,24 @@ public class MainUI extends Application {
         root.add(mv, 0, 0);
         root.add(n, 1, 0);
 
+        // try {
+        //     Registry r = LocateRegistry.getRegistry(null);
+        //     Categorias cat = (Categorias) r.lookup("Hello");
+         
+        //     List<Categoria> lista = cat.getCategorias();
+
+        //     for (Categoria categoria : lista) {
+        //         System.out.println("ID: " + categoria.getId());
+        //         System.out.println("Nombre: " + categoria.getNombre());
+        //     }
+            
+            
+
+        // } catch (RemoteException e) {
+        //     e.printStackTrace();
+        // } catch (NotBoundException e) {
+        //     e.printStackTrace();
+        // }
 
         stage.setScene(s);
         stage.show();

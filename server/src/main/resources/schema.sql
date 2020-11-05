@@ -44,3 +44,6 @@ CREATE TABLE Exclusion_Recordatorio_Dia (
     FOREIGN KEY (id_dia)
         REFERENCES Dia (id_dia)
 );
+
+INSERT INTO Categoria (id_categoria, nombre)
+    VALUES (1, "dodoria");
