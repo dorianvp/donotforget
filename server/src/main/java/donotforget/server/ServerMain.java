@@ -36,6 +36,7 @@ public class ServerMain {
                 //inicializar base de datos
                 initDatabase();
             }
+            bindObjects();
             //Localizo el registro y bindeo checker
             //asi el cliente se puede conectar
 
@@ -94,12 +95,33 @@ public class ServerMain {
         return false;
     }
 
+    private static void bindObjects() {
+        try {
+            CategoriasServer cs = new CategoriasServer();
+
+            Categorias cat = (Categorias) UnicastRemoteObject.exportObject(cs, 0);
+
+            Registry registry;
+        
+            registry = LocateRegistry.getRegistry();
+            registry.bind("Hello", cat);  
+            System.err.println("Binded categorias"); 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+
     private static void initDatabase() {
         try {
             System.err.println("LOG> Inicializando la base de datos");
             Connection c;
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:local.db");
+            String p = new File(ServerMain.class.getProtectionDomain().getCodeSource().getLocation()
+            .toURI()).getParent().toString();
+            System.out.println(p);
+
+            c = DriverManager.getConnection("jdbc:sqlite:" + p + File.separator + "local.db");
 
             InputStream in = ServerMain.class.getResourceAsStream("/schema.sql");
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
@@ -110,14 +132,7 @@ public class ServerMain {
             sr.setEscapeProcessing(false);
             sr.runScript(reader);
 
-            CategoriasServer cs = new CategoriasServer();
-
-            Categorias cat = (Categorias) UnicastRemoteObject.exportObject(cs, 0);
-
-            Registry registry = LocateRegistry.getRegistry(); 
-         
-            registry.bind("Hello", cat);  
-            System.err.println("Binded categorias"); 
+            
 
         } catch (Exception e) {
             System.out.println("Error: " + e);

@@ -11,6 +11,7 @@ import java.util.List;
 
 import donotforget.commons.Categoria;
 import donotforget.remote.Categorias;
+import donotforget.wrappers.DatabaseWrapper;
 
 public class CategoriasServer implements Categorias {
 
@@ -20,14 +21,13 @@ public class CategoriasServer implements Categorias {
         List<Categoria> cat = new ArrayList<Categoria>();
         
         try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:local.db");
+
+            DatabaseWrapper dbw = new DatabaseWrapper();
+
+            c = dbw.connect();
 
             Statement s = c.createStatement();
-
             ResultSet rs = s.executeQuery("SELECT * FROM Categoria");
-
-            
 
             while(rs.next()) {
                 cat.add(new Categoria(rs.getString("nombre"), rs.getInt("id_categoria")));
@@ -35,16 +35,15 @@ public class CategoriasServer implements Categorias {
 
             rs.close();
             s.close();
-            c.close();
+            dbw.disconnect();
 
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
-        
         return cat;
     }
-    
+
+    public void addCategoria(Categoria c) {
+
+    }
 }

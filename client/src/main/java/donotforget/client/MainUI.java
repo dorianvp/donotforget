@@ -1,62 +1,68 @@
 package donotforget.client;
 
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.List;
+
+import donotforget.commons.Categoria;
 import donotforget.layout.MainView;
 import donotforget.layout.Navigation;
+import donotforget.remote.Categorias;
 import javafx.application.Application;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class MainUI extends Application {
 
-    private GridPane root = new GridPane();
+    private BorderPane root = new BorderPane();
 
     @Override
     public void start(Stage stage) {
 
-        Scene s = new Scene(this.root, 640, 480);
+        Rectangle2D r = Screen.getPrimary().getBounds();
+
+
+
+        Scene s = new Scene(this.root, r.getWidth() - r.getWidth() * 0.3, r.getHeight() - r.getHeight() * 0.3);
         Color c = new Color(0, 1, 0, 1);
         s.setFill(c);
 
         Navigation n = new Navigation();
         MainView mv = new MainView();
 
-        ColumnConstraints col1 = new ColumnConstraints();
-        col1.setPercentWidth(80);
+        //root.setMaxWidth(Double.MAX_VALUE);
 
-        ColumnConstraints col2 = new ColumnConstraints();
-        col2.setPercentWidth(20);
-
-        RowConstraints r1 = new RowConstraints();
-        r1.setPercentHeight(100);
-
-        root.getColumnConstraints().addAll(col1, col2);
-        root.getRowConstraints().addAll(r1);
-
-        root.add(mv, 0, 0);
-        root.add(n, 1, 0);
-
-        // try {
-        //     Registry r = LocateRegistry.getRegistry(null);
-        //     Categorias cat = (Categorias) r.lookup("Hello");
+        root.setCenter(mv);
+        root.setRight(n);
+        try {
+            Registry reg = LocateRegistry.getRegistry(null);
+            Categorias cat = (Categorias) reg.lookup("Hello");
          
-        //     List<Categoria> lista = cat.getCategorias();
+            List<Categoria> lista = cat.getCategorias();
 
-        //     for (Categoria categoria : lista) {
-        //         System.out.println("ID: " + categoria.getId());
-        //         System.out.println("Nombre: " + categoria.getNombre());
-        //     }
+            for (Categoria categoria : lista) {
+                System.out.println("ID: " + categoria.getId());
+                System.out.println("Nombre: " + categoria.getNombre());
+            }
             
             
 
-        // } catch (RemoteException e) {
-        //     e.printStackTrace();
-        // } catch (NotBoundException e) {
-        //     e.printStackTrace();
-        // }
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (NotBoundException e) {
+            e.printStackTrace();
+        }
 
         stage.setScene(s);
         stage.show();

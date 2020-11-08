@@ -9,8 +9,7 @@ public class Navigation extends BorderPane {
         super();
         Button t = new Button("derechaa");
         this.setMinHeight(200);
-        this.setMinWidth(200);
-        t.setMaxWidth(Double.MAX_VALUE);
+        
 
         t.getStyleClass().add("boton");
 
@@ -19,6 +18,7 @@ public class Navigation extends BorderPane {
         this.setBottom(t);
         BorderPane.setAlignment(t, Pos.CENTER);
         this.setMinWidth(0);
+        this.setPrefWidth(300);
 
 
         this.setStyle("-fx-background-color: blue;");

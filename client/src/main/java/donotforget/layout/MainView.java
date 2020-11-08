@@ -10,9 +10,9 @@ import javafx.scene.text.Text;
 public class MainView extends VBox {
     public MainView() {
         super();
-        
+        this.setMaxWidth(Double.MAX_VALUE);
         Text t = new Text("zurdooo");
-        this.setMinHeight(200);
+        this.setMinHeight(100);
         this.setMinWidth(200);
 
         this.getChildren().add(t);
