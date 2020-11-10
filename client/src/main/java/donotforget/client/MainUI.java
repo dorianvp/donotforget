@@ -38,6 +38,10 @@ public class MainUI extends Application {
         Color c = new Color(0, 1, 0, 1);
         s.setFill(c);
 
+        String css = this.getClass().getClassLoader().getResource("styles.css").toExternalForm();
+        s.getStylesheets().clear();
+        s.getStylesheets().add(css);
+
         Navigation n = new Navigation();
         MainView mv = new MainView();
 
@@ -45,25 +49,6 @@ public class MainUI extends Application {
 
         root.setCenter(mv);
         root.setRight(n);
-        try {
-            Registry reg = LocateRegistry.getRegistry(null);
-            Categorias cat = (Categorias) reg.lookup("Hello");
-         
-            List<Categoria> lista = cat.getCategorias();
-
-            for (Categoria categoria : lista) {
-                System.out.println("ID: " + categoria.getId());
-                System.out.println("Nombre: " + categoria.getNombre());
-            }
-            
-            
-
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        } catch (NotBoundException e) {
-            e.printStackTrace();
-        }
-
         stage.setScene(s);
         stage.show();
 

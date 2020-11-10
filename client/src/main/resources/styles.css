@@ -1,3 +1,16 @@
+.button {
+  -fx-background-color: '#F1F1F1';
+  -fx-transition: 600ms;
+  -fx-background-radius: 0;
+}
+.button:hover {
+  -fx-background-color: '#2483FF';
+  -fx-cursor: hand;
+  -fx-text-fill: '#FFFFFF';
+}
+.button:active {
+  -fx-background-color: '#DCDADA';
+}
 .root {
   -fx-background-color: #34f0e6;
 }

@@ -1,7 +1,7 @@
 -- Scripts para la creacion de la base de datos (tablas)
 
 CREATE TABLE Categoria (
-    id_categoria INTEGER PRIMARY KEY,
+    id_categoria INTEGER PRIMARY KEY AUTOINCREMENT,
     nombre TEXT UNIQUE
 );
 
@@ -11,7 +11,7 @@ CREATE TABLE Dia (
 );
 
 CREATE TABLE Evento (
-    id_evento INTEGER PRIMARY KEY, 
+    id_evento INTEGER PRIMARY KEY AUTOINCREMENT, 
     id_categoria INTEGER,
     titulo TEXT,
     descripcion TEXT,
@@ -23,7 +23,7 @@ CREATE TABLE Evento (
 );
 
 CREATE TABLE Recordatorio (
-    id_recordatorio INTEGER PRIMARY KEY,
+    id_recordatorio INTEGER PRIMARY KEY AUTOINCREMENT,
     id_categoria INTEGER,
     titulo TEXT,
     descripcion TEXT,
@@ -45,5 +45,5 @@ CREATE TABLE Exclusion_Recordatorio_Dia (
         REFERENCES Dia (id_dia)
 );
 
-INSERT INTO Categoria (id_categoria, nombre)
-    VALUES (1, "dodoria");
+INSERT INTO Categoria (nombre)
+    VALUES ("dodoria"), ("Trabajo"), ("Cumpleaños"), ("Escuela");

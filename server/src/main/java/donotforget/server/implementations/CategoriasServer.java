@@ -3,6 +3,7 @@ package donotforget.server.implementations;
 import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -44,6 +45,18 @@ public class CategoriasServer implements Categorias {
     }
 
     public void addCategoria(Categoria c) {
+        
+        try {
+            DatabaseWrapper dbw = new DatabaseWrapper();
+            Connection con = dbw.connect();
+            PreparedStatement p = con.prepareStatement("INSERT INTO Categoria (nombre) VALUES (?)");
+            p.setString(0, c.getNombre());
+            p.executeUpdate();
+            p.close();
+            dbw.disconnect();
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

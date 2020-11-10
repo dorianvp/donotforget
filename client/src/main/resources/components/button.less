@@ -1,0 +1,15 @@
+@import "../global/colors.less";
+
+.button {
+    -fx-background-color: @grey;
+    -fx-transition: 600ms;
+    -fx-background-radius: 0;
+    &:hover {
+        -fx-background-color: @blue;
+        -fx-cursor: hand;
+        -fx-text-fill: @white;
+    }
+    &:active {
+        -fx-background-color: @dark-grey;
+    }
+}
