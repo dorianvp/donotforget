@@ -2,7 +2,6 @@ package donotforget.server.implementations;
 
 import java.rmi.RemoteException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,6 +29,7 @@ public class CategoriasServer implements Categorias {
             Statement s = c.createStatement();
             ResultSet rs = s.executeQuery("SELECT * FROM Categoria");
 
+            // cat.clear();
             while(rs.next()) {
                 cat.add(new Categoria(rs.getString("nombre"), rs.getInt("id_categoria")));
             }
@@ -44,7 +44,34 @@ public class CategoriasServer implements Categorias {
         return cat;
     }
 
-    public void addCategoria(Categoria c) {
+    public Categoria getCategoriaById(int id) {
+        Connection c;
+        Categoria cat = null;
+        try {
+
+            DatabaseWrapper dbw = new DatabaseWrapper();
+
+            c = dbw.connect();
+
+            PreparedStatement s = c.prepareStatement("SELECT * FROM Categoria WHERE id_categoria = ?");
+            s.setInt(0, id);
+            ResultSet rs = s.executeQuery();
+
+            while(rs.next()) {
+                cat = new Categoria(rs.getString("nombre"), rs.getInt("id_categoria"));
+            }
+
+            rs.close();
+            s.close();
+            dbw.disconnect();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cat;
+    }
+
+    public boolean addCategoria(Categoria c) {
         
         try {
             DatabaseWrapper dbw = new DatabaseWrapper();
@@ -54,8 +81,20 @@ public class CategoriasServer implements Categorias {
             p.executeUpdate();
             p.close();
             dbw.disconnect();
-
+            return true;
         } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    // TODOOOOOOO
+    public void removeCategoria(int id) {
+        try {
+            DatabaseWrapper dw = new DatabaseWrapper();
+            Connection c = dw.connect();
+            // TODO: remove all linked rows.
+            // PreparedStatement p = c.prepareStatement("DELETE")
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -4,14 +4,17 @@ import java.rmi.registry.Registry;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import org.apache.ibatis.io.Resources;
 
 import org.apache.ibatis.jdbc.ScriptRunner;
 
@@ -102,7 +105,6 @@ public class ServerMain {
             Categorias cat = (Categorias) UnicastRemoteObject.exportObject(cs, 0);
 
             Registry registry;
-        
             registry = LocateRegistry.getRegistry();
             registry.bind("Hello", cat);  
             System.err.println("Binded categorias"); 
@@ -119,14 +121,16 @@ public class ServerMain {
             Class.forName("org.sqlite.JDBC");
             String p = new File(ServerMain.class.getProtectionDomain().getCodeSource().getLocation()
             .toURI()).getParent().toString();
-            System.out.println(p);
+            // System.out.println(p);
 
             c = DriverManager.getConnection("jdbc:sqlite:" + p + File.separator + "local.db");
 
+            
             InputStream in = ServerMain.class.getResourceAsStream("/schema.sql");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
 
             ScriptRunner sr = new ScriptRunner(c);
+            
 
             // Sin esto, ScriptRunner hace la suicidación.
             sr.setEscapeProcessing(false);

@@ -1,9 +1,5 @@
 package donotforget.layout;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text; 
 

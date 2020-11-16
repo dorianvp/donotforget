@@ -1,4 +1,5 @@
 -- Scripts para la creacion de la base de datos (tablas)
+PRAGMA encoding = "UTF-8"; 
 
 CREATE TABLE Categoria (
     id_categoria INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -6,7 +7,7 @@ CREATE TABLE Categoria (
 );
 
 CREATE TABLE Dia (
-    id_dia INTEGER PRIMARY KEY, 
+    id_dia INTEGER PRIMARY KEY AUTOINCREMENT, 
     dia TEXT
 );
 
@@ -44,6 +45,9 @@ CREATE TABLE Exclusion_Recordatorio_Dia (
     FOREIGN KEY (id_dia)
         REFERENCES Dia (id_dia)
 );
+
+INSERT INTO Dia (dia) 
+    VALUES ("Lunes"), ("Martes"), ("Miércoles"), ("Jueves"), ("Viernes"), ("Sábado"), ("Domingo");
 
 INSERT INTO Categoria (nombre)
     VALUES ("dodoria"), ("Trabajo"), ("Cumpleaños"), ("Escuela");

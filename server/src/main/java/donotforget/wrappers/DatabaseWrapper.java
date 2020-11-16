@@ -1,12 +1,10 @@
 package donotforget.wrappers;
 
 import java.io.File;
-import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 
-import org.apache.ibatis.jdbc.Null;
+import org.sqlite.SQLiteConfig;
 
 public class DatabaseWrapper {
     private Connection c;
@@ -16,8 +14,10 @@ public class DatabaseWrapper {
             Class.forName("org.sqlite.JDBC");
             String p = new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI()).getParent()
                     .toString();
-            c = DriverManager.getConnection("jdbc:sqlite:" + p + File.separator + "local.db");
-            System.out.println(p);
+            SQLiteConfig config = new SQLiteConfig();
+            config.setEncoding(SQLiteConfig.Encoding.UTF8);
+            c = DriverManager.getConnection("jdbc:sqlite:" + p + File.separator + "local.db", config.toProperties());
+            // System.out.println(p);
             return c;
         } catch (Exception e) {
             e.printStackTrace();
