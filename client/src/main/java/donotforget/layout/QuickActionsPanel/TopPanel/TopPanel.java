@@ -13,6 +13,7 @@ public class TopPanel extends BorderPane {
     private EventHandler<ActionEvent> onAdd = new EventHandler<ActionEvent>() {
         public void handle(ActionEvent e) {
             System.out.println("AddEvent");
+            
         }
     };
 

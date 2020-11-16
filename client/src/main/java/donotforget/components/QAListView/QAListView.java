@@ -12,37 +12,27 @@ import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.util.Callback;
 import donotforget.commons.Categoria;
 import donotforget.components.QAListView.ListViewItem.ListViewItem;
+import donotforget.components.QAListView.internals.CategoryCell;
 
-public class QAListView extends ListView<ListViewItem> {
+public class QAListView extends ListView<Categoria> {
 
     public QAListView() {
         //TODO: Add cell factory here
-        this.setCellFactory(CheckBoxListCell.forListView(new Callback<ListViewItem, ObservableValue<Boolean>>() {
+        this.setCellFactory(new Callback<ListView<Categoria>, ListCell<Categoria>>() {
 
             @Override
-            public ObservableValue<Boolean> call(ListViewItem param) {
-                
-                ListCell<ListViewItem> cell = new ListCell<ListViewItem>() {
-
-                    @Override
-                    protected void updateItem(ListViewItem item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (item != null) {
-                            setText(item.getCategory().getNombre());
-                        }
-                    }
-                };
-                return null;
+            public ListCell<Categoria> call(ListView<Categoria> param) {
+                return new CategoryCell();
             }
 
-        }));
+        });
 
     }
 
     public void setItems(List<Categoria> elements) {
-        List<ListViewItem> l = new ArrayList<ListViewItem>();
+        List<Categoria> l = new ArrayList<Categoria>();
         for (Categoria c : elements) {
-            l.add(new ListViewItem(c, false));
+            l.add(c);
         }
         this.getItems().addAll(l);
     }
