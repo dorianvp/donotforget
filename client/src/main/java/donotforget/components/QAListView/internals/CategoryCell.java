@@ -1,10 +1,13 @@
 package donotforget.components.QAListView.internals;
 
 import donotforget.commons.Categoria;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListCell;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
 public class CategoryCell extends ListCell<Categoria> {
@@ -15,6 +18,9 @@ public class CategoryCell extends ListCell<Categoria> {
 
     public CategoryCell() {
         super();
+
+
+        this.btnRemove.addEventHandler(MouseEvent.MOUSE_CLICKED, onRemove);
 
         this.bp.setLeft(this.cb);
         this.bp.setRight(this.btnRemove);
@@ -34,4 +40,15 @@ public class CategoryCell extends ListCell<Categoria> {
             setGraphic(this.bp);
         }
     }
+
+    public Categoria getLastItem() {
+        return this.lastItem;
+    }
+
+    public EventHandler<MouseEvent> onRemove = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent e) {
+            System.out.println(((CategoryCell)((Button) e.getSource()).getParent().getParent()).getLastItem().getId());
+        }
+    };
 }
