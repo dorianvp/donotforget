@@ -42,7 +42,6 @@ public class QuickActions extends BorderPane {
         this.setMinWidth(0);
         this.setPrefWidth(300);
         this.setMaxWidth(Double.MAX_VALUE);
-        this.setStyle("-fx-background-color: green;");
         this.loadCategories();
     }
 
@@ -53,7 +52,6 @@ public class QuickActions extends BorderPane {
             System.out.println("ID: " + categoria.getId());
             System.out.println("Nombre: " + categoria.getNombre());
         }
-        this.lv.getItems().clear();
         this.lv.setItems(l);
     }
 }

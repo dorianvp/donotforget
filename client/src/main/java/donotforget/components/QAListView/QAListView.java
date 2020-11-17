@@ -25,6 +25,8 @@ public class QAListView extends ListView<Categoria> {
                 return new CategoryCell();
             }
 
+            
+
         });
 
     }
@@ -34,6 +36,7 @@ public class QAListView extends ListView<Categoria> {
         for (Categoria c : elements) {
             l.add(c);
         }
+        this.getItems().clear();
         this.getItems().addAll(l);
     }
 }

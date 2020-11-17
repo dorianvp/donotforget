@@ -48,6 +48,3 @@ CREATE TABLE Exclusion_Recordatorio_Dia (
 
 INSERT INTO Dia (dia) 
     VALUES ("Lunes"), ("Martes"), ("Miércoles"), ("Jueves"), ("Viernes"), ("Sábado"), ("Domingo");
-
-INSERT INTO Categoria (nombre)
-    VALUES ("dodoria"), ("Trabajo"), ("Cumpleaños"), ("Escuela");

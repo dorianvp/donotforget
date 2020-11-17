@@ -34,6 +34,7 @@ public class CategoryCell extends ListCell<Categoria> {
         setText(null);  // No text in label of super class
         if (empty) {
             lastItem = null;
+            setGraphic(null);
         } else {
             lastItem = item;
             cb.setText(item != null ? item.getNombre() : "<null>");
