@@ -14,3 +14,7 @@
 .root {
   -fx-background-color: #34f0e6;
 }
+
+.dialog {
+  -fx-background-color: '#DCDADA';
+}

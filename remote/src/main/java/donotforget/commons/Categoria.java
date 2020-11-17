@@ -12,6 +12,11 @@ public class Categoria implements Serializable {
         this.setId(id);
     }
 
+    
+    public Categoria(String n) {
+        this.setNombre(n);
+    }
+
     public String getNombre() {
         return this.nombre;
     }

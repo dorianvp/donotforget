@@ -19,7 +19,7 @@ import javafx.scene.layout.BorderPane;
 
 public class QuickActions extends BorderPane {
     private CalendarButton btnAdd = new CalendarButton("Nuevo elemento");
-    private TopPanel bPanelTop = new TopPanel();
+    private TopPanel bPanelTop = new TopPanel(this);
     private QAListView lv = new QAListView();
 
 
@@ -46,13 +46,14 @@ public class QuickActions extends BorderPane {
         this.loadCategories();
     }
 
-    private void loadCategories() {
+    public void loadCategories() {
         ServerWrapper sw = new ServerWrapper();
-            List<Categoria> l = sw.getCategorias();
-            for (Categoria categoria : l) {
-                System.out.println("ID: " + categoria.getId());
-                System.out.println("Nombre: " + categoria.getNombre());
-            }
-            this.lv.setItems(l);
+        List<Categoria> l = sw.getCategorias();
+        for (Categoria categoria : l) {
+            System.out.println("ID: " + categoria.getId());
+            System.out.println("Nombre: " + categoria.getNombre());
+        }
+        this.lv.getItems().clear();
+        this.lv.setItems(l);
     }
 }

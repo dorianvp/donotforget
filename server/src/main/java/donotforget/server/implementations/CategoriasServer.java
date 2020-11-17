@@ -77,7 +77,7 @@ public class CategoriasServer implements Categorias {
             DatabaseWrapper dbw = new DatabaseWrapper();
             Connection con = dbw.connect();
             PreparedStatement p = con.prepareStatement("INSERT INTO Categoria (nombre) VALUES (?)");
-            p.setString(0, c.getNombre());
+            p.setString(1, c.getNombre());
             p.executeUpdate();
             p.close();
             dbw.disconnect();
@@ -88,7 +88,7 @@ public class CategoriasServer implements Categorias {
         }
     }
     // TODOOOOOOO
-    public void removeCategoria(int id) {
+    public boolean removeCategoria(int id) {
         try {
             DatabaseWrapper dw = new DatabaseWrapper();
             Connection c = dw.connect();
@@ -97,5 +97,6 @@ public class CategoriasServer implements Categorias {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return false;
     }
 }

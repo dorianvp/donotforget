@@ -20,4 +20,19 @@ public class ServerWrapper {
             return null;
         }
     }
+
+    public boolean addCategoria(Categoria c) {
+        try {
+            this.reg = LocateRegistry.getRegistry(null);
+            Categorias cat = (Categorias) reg.lookup("Hello");
+            if(cat.addCategoria(c)) {
+                System.out.println("true en sw");
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
