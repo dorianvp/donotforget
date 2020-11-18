@@ -12,9 +12,13 @@
   -fx-background-color: '#DCDADA';
 }
 .root {
-  -fx-background-color: #34f0e6;
+  -fx-background-color: #5fe9e2;
 }
 
 .dialog {
   -fx-background-color: '#DCDADA';
+}
+
+.header {
+  -fx-background-color: '#FF0000';
 }
