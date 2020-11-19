@@ -11,14 +11,24 @@
 .button:active {
   -fx-background-color: '#DCDADA';
 }
-.root {
-  -fx-background-color: #5fe9e2;
+.white-button {
+  -fx-background-color: '#F1F1F1';
+  -fx-transition: 600ms;
+  -fx-background-radius: 0;
+  -fx-background-color: '#FFFFFF';
+  -fx-padding: 10;
 }
-
-.dialog {
+.white-button:hover {
+  -fx-background-color: '#2483FF';
+  -fx-cursor: hand;
+  -fx-text-fill: '#FFFFFF';
+}
+.white-button:active {
   -fx-background-color: '#DCDADA';
 }
-
 .header {
-  -fx-background-color: '#FF0000';
+  -fx-background-color: '#F1F1F1';
+}
+.root {
+  -fx-background-color: #34f0e6;
 }

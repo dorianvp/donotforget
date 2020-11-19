@@ -8,4 +8,10 @@ public class CalendarButton extends Button {
         this.getStyleClass().clear();
         this.getStyleClass().add("button");
     }
+
+    public CalendarButton(String display, String cssClass) {
+        super(display);
+        this.getStyleClass().clear();
+        this.getStyleClass().add(cssClass);   
+    }
 }

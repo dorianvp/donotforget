@@ -7,7 +7,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text; 
 
 public class MainView extends GridPane {
     private HeaderBar header = new HeaderBar();
@@ -19,7 +18,7 @@ public class MainView extends GridPane {
         this.setMinWidth(200);
 
         RowConstraints r1 = new RowConstraints();
-        r1.setPrefHeight(100);
+        r1.setPrefHeight(75);
         r1.setValignment(VPos.CENTER);
         GridPane.setHgrow(this.header, Priority.ALWAYS);
         // System.out.println("Height: " + );
