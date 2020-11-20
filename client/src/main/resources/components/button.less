@@ -19,3 +19,16 @@
     -fx-background-color: @white;
     -fx-padding: 10;
 }
+
+.toggle-button {
+    .white-button();
+    &:hover {
+        -fx-background-color: @grey;
+        -fx-text-fill: @black;
+    }
+    &:selected{
+        -fx-background-color: @blue;
+        -fx-cursor: hand;
+        -fx-text-fill: @white;
+    }
+}

@@ -13,5 +13,8 @@ public class NavigationButtons extends HBox {
     public NavigationButtons() {
         this.getChildren().addAll(btnPrevious, lblCurrentMonth, btnNext);
         this.setAlignment(Pos.CENTER_LEFT);
+
+        this.lblCurrentMonth.getStyleClass().clear();
+        this.lblCurrentMonth.getStyleClass().add("label");
     }
 }

@@ -26,8 +26,41 @@
 .white-button:active {
   -fx-background-color: '#DCDADA';
 }
+.toggle-button {
+  -fx-background-color: '#F1F1F1';
+  -fx-transition: 600ms;
+  -fx-background-radius: 0;
+  -fx-background-color: '#FFFFFF';
+  -fx-padding: 10;
+}
+.toggle-button:hover {
+  -fx-background-color: '#2483FF';
+  -fx-cursor: hand;
+  -fx-text-fill: '#FFFFFF';
+}
+.toggle-button:active {
+  -fx-background-color: '#DCDADA';
+}
+.toggle-button:hover {
+  -fx-background-color: '#F1F1F1';
+  -fx-text-fill: '#000000';
+}
+.toggle-button:selected {
+  -fx-background-color: '#2483FF';
+  -fx-cursor: hand;
+  -fx-text-fill: '#FFFFFF';
+}
 .header {
   -fx-background-color: '#F1F1F1';
+}
+.label {
+  -fx-background-color: '#FFFFFF';
+  -fx-padding: 10;
+}
+.white-label {
+  -fx-background-color: '#FFFFFF';
+  -fx-padding: 10;
+  -fx-padding: 5;
 }
 .root {
   -fx-background-color: #34f0e6;
