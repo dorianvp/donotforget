@@ -13,5 +13,6 @@ public class CalendarButton extends Button {
         super(display);
         this.getStyleClass().clear();
         this.getStyleClass().add(cssClass);   
+
     }
 }

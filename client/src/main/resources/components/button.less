@@ -1,4 +1,5 @@
 @import "../global/colors.less";
+@import '../components/label.less';
 
 .button {
     -fx-background-color: @grey;
@@ -9,8 +10,8 @@
         -fx-cursor: hand;
         -fx-text-fill: @white;
     }
-    &:active {
-        -fx-background-color: @dark-grey;
+    &:pressed {
+        -fx-background-color: @dark-blue;
     }
 }
 
@@ -31,4 +32,9 @@
         -fx-cursor: hand;
         -fx-text-fill: @white;
     }
+}
+
+.label-button {
+    .white-button();
+    .white-label();
 }

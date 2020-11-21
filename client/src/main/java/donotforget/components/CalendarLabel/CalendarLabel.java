@@ -8,5 +8,6 @@ public class CalendarLabel extends Label {
         this.getStyleClass().clear();
         this.getStyleClass().add(cssClass);
         this.setMaxWidth(Double.MAX_VALUE);
+        this.setMaxHeight(Double.MAX_VALUE);
     }
 }

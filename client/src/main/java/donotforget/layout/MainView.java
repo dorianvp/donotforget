@@ -1,5 +1,7 @@
 package donotforget.layout;
 
+import java.time.LocalDateTime;
+
 import donotforget.layout.MainViewPanels.DetailsPanel.DetailsPanel;
 import donotforget.layout.MainViewPanels.DetailsPanel.MainGrid.MainGrid;
 import donotforget.layout.MainViewPanels.HeaderBar.HeaderBar;
@@ -15,6 +17,7 @@ public class MainView extends GridPane {
     private HeaderBar header = new HeaderBar();
     private DetailsPanel dt = new DetailsPanel();
     private MainGrid mg = new MainGrid();
+    public LocalDateTime navigationDate = LocalDateTime.now();
 
     public MainView() {
         super();
@@ -29,9 +32,14 @@ public class MainView extends GridPane {
         GridPane.setHgrow(this.header, Priority.ALWAYS);
 
         RowConstraints r2 = new RowConstraints();
-        
         r2.setValignment(VPos.CENTER);
         GridPane.setHgrow(this.dt, Priority.ALWAYS);
+
+        RowConstraints r3 = new RowConstraints();
+        r3.setValignment(VPos.CENTER);
+        GridPane.setVgrow(this.mg, Priority.ALWAYS);
+        GridPane.setHgrow(this.mg, Priority.ALWAYS);
+        r3.setMaxHeight(Double.MAX_VALUE);
 
         
         
@@ -41,7 +49,8 @@ public class MainView extends GridPane {
 
         this.add(this.header, 0, 0);
         this.add(this.dt, 0, 1);
-        this.getRowConstraints().addAll(r1, r2);
+        this.add(this.mg, 0, 2);
+        this.getRowConstraints().addAll(r1, r2, r3);
         this.getColumnConstraints().add(c1);
 
         String css = this.getClass().getClassLoader().getResource("styles.css").toExternalForm();
