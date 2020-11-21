@@ -28,10 +28,14 @@ public class DayBar extends GridPane {
         };
 
         for (ColumnConstraints columnConstraints : columns) {
-            columnConstraints.setPercentWidth(100 / 7);
+            columnConstraints.setPercentWidth(100 / 7.0);
+            this.getColumnConstraints().add(columnConstraints);
+            System.out.println(columnConstraints.getPercentWidth());
         }
-        this.getColumnConstraints().addAll(columns);
-        this.getChildren().addAll(labels);
+        
+        for (int i = 0; i < labels.length; i++) {
+            this.addColumn(i, labels[i]);
+        }
         
         
     }

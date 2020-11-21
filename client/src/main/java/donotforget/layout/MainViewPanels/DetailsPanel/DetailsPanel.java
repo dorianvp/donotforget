@@ -19,12 +19,9 @@ public class DetailsPanel extends GridPane {
         this.addRow(0, this.days);
         this.getColumnConstraints().add(r1);
 
-        this.getStyleClass().clear();
-        this.getStyleClass().add("bruh");  
-        this.setStyle(".bruh { -fx-background-color: red; }");
-
         this.setMaxWidth(Double.MAX_VALUE);
-        System.out.println(this.getWidth());
+
+        //System.out.println(this.getWidth());
 
     }
 }

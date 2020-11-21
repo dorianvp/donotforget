@@ -61,6 +61,8 @@
   -fx-background-color: '#FFFFFF';
   -fx-padding: 10;
   -fx-padding: 5;
+  -fx-border-width: 1;
+  -fx-border-color: '#F1F1F1';
 }
 .root {
   -fx-background-color: #34f0e6;

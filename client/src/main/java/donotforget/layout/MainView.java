@@ -1,6 +1,7 @@
 package donotforget.layout;
 
 import donotforget.layout.MainViewPanels.DetailsPanel.DetailsPanel;
+import donotforget.layout.MainViewPanels.DetailsPanel.MainGrid.MainGrid;
 import donotforget.layout.MainViewPanels.HeaderBar.HeaderBar;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
@@ -13,6 +14,7 @@ import javafx.scene.layout.VBox;
 public class MainView extends GridPane {
     private HeaderBar header = new HeaderBar();
     private DetailsPanel dt = new DetailsPanel();
+    private MainGrid mg = new MainGrid();
 
     public MainView() {
         super();
@@ -27,7 +29,7 @@ public class MainView extends GridPane {
         GridPane.setHgrow(this.header, Priority.ALWAYS);
 
         RowConstraints r2 = new RowConstraints();
-        r2.setPrefHeight(75);
+        
         r2.setValignment(VPos.CENTER);
         GridPane.setHgrow(this.dt, Priority.ALWAYS);
 
