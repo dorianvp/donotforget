@@ -16,7 +16,7 @@ import javafx.scene.layout.VBox;
 public class MainView extends GridPane {
     private HeaderBar header;
     private DetailsPanel dt = new DetailsPanel();
-    private MainGrid mg;
+    public MainGrid mg;
     public LocalDateTime navigationDate = LocalDateTime.now();
 
     public MainView() {

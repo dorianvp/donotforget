@@ -26,6 +26,7 @@ public class NavigationButtons extends HBox {
                 (dateOwner.navigationDate.getMonth().toString().substring(1).toLowerCase()) + " " +
                 dateOwner.navigationDate.getYear()
             );
+            dateOwner.mg.updateGrid();
          } 
     };
 
@@ -39,6 +40,7 @@ public class NavigationButtons extends HBox {
                 (dateOwner.navigationDate.getMonth().toString().substring(1).toLowerCase()) + " " +
                 dateOwner.navigationDate.getYear()
             );
+            dateOwner.mg.updateGrid();
          } 
     };
     

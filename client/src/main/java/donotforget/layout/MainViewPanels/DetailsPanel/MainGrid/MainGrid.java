@@ -12,7 +12,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
 public class MainGrid extends GridPane {
-    public CalendarButton[][] labels = new CalendarButton[7][5];
+    public CalendarButton[][] labels = new CalendarButton[7][6];
     private MainView parent = null;
 
     public MainGrid(MainView mv) {
@@ -25,7 +25,7 @@ public class MainGrid extends GridPane {
     public MainGrid() {
         super();
         for (int x = 0; x < 7; x++) {
-            for (int y = 0; y < 5; y++) {
+            for (int y = 0; y < 6; y++) {
                 labels[x][y] = new CalendarButton("", "label-button");
             }
         }
@@ -45,11 +45,12 @@ public class MainGrid extends GridPane {
             new RowConstraints(),
             new RowConstraints(),
             new RowConstraints(),
+            new RowConstraints(),
             new RowConstraints()
         };
 
         for (RowConstraints row : rows) {
-            row.setPercentHeight(100 / 5.0);
+            row.setPercentHeight(100 / 6.0);
             this.getRowConstraints().add(row);
         }
 
@@ -59,7 +60,7 @@ public class MainGrid extends GridPane {
         }        
         
         for (int x = 0; x < 7; x++) {
-            for (int y = 0; y < 5; y++) {
+            for (int y = 0; y < 6; y++) {
                 this.labels[x][y].setMaxHeight(Double.MAX_VALUE);
                 this.labels[x][y].setMaxWidth(Double.MAX_VALUE);
                 this.add(labels[x][y], x, y);
@@ -69,11 +70,35 @@ public class MainGrid extends GridPane {
         this.setMaxHeight(Double.MAX_VALUE);
     }
     public void updateGrid() {
-        for (int x = 0; x < 7; x++) {
-            for (int y = 0; y < 5; y++) {
-                // this.parent.navigationDate.
-                this.labels[x][y].setText(String.valueOf(x + 1 + y * 7));
+        System.out.println(parent.navigationDate.withDayOfMonth(1).getDayOfWeek().getValue());
+        int counter = 1;
+
+        for (CalendarButton[] b : this.labels) {
+            for (CalendarButton c : b) {
+                c.setText("");
             }
+        }
+
+        for (int y = 0; y < 6; y++) {
+            GregorianCalendar g = new GregorianCalendar();
+            System.out.println(counter);
+ 
+            for (int x = 0; x < 7; x++) {
+                if (counter > parent.navigationDate.getMonth().length(g.isLeapYear(parent.navigationDate.getYear()))) { 
+                    // labels[x][y] = new CalendarButton("", "disabled-label");
+                    break;
+                } else {
+                    if (y == 0 && x == 0) {
+                        x = parent.navigationDate.withDayOfMonth(1).getDayOfWeek().getValue() - 1;
+                    }
+                    
+                    // parent.navigationDate.withDayOfMonth(1).getDayOfWeek().getValue();
+                    labels[x][y].setText(String.valueOf(counter));
+                }
+                
+                counter++;
+            }
+            
         }
     }
 }
