@@ -14,14 +14,17 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 
 public class MainView extends GridPane {
-    private HeaderBar header = new HeaderBar();
+    private HeaderBar header;
     private DetailsPanel dt = new DetailsPanel();
-    private MainGrid mg = new MainGrid();
+    private MainGrid mg;
     public LocalDateTime navigationDate = LocalDateTime.now();
 
     public MainView() {
         super();
         this.setMaxWidth(Double.MAX_VALUE);
+
+        this.mg = new MainGrid(this);
+        this.header = new HeaderBar(this);
 
         this.setMinHeight(100);
         this.setMinWidth(200);
@@ -59,4 +62,6 @@ public class MainView extends GridPane {
         this.getStylesheets().add(css);
     }
 
+
 }
+

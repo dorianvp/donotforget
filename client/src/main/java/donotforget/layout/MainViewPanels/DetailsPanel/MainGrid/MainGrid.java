@@ -12,13 +12,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
 public class MainGrid extends GridPane {
-    private CalendarButton[][] labels = new CalendarButton[7][5];
-    private MainView parent;
+    public CalendarButton[][] labels = new CalendarButton[7][5];
+    private MainView parent = null;
 
     public MainGrid(MainView mv) {
         this();
         this.parent = mv;
-        
+          
+        this.updateGrid();
     }
 
     public MainGrid() {
@@ -55,10 +56,7 @@ public class MainGrid extends GridPane {
         for (ColumnConstraints column : columns) {
             column.setPercentWidth(100 / 7.0);
             this.getColumnConstraints().add(column);
-        }
-
-        LocalDateTime d = LocalDateTime.now();
-        
+        }        
         
         for (int x = 0; x < 7; x++) {
             for (int y = 0; y < 5; y++) {
@@ -69,17 +67,12 @@ public class MainGrid extends GridPane {
         }
 
         this.setMaxHeight(Double.MAX_VALUE);
-        
-        this.updateGrid();
-        
     }
-
     public void updateGrid() {
-        // check parent variable and handle year, month and day
-
         for (int x = 0; x < 7; x++) {
             for (int y = 0; y < 5; y++) {
-                labels[x][y].setText(String.valueOf(x + 1 + y * 7));
+                // this.parent.navigationDate.
+                this.labels[x][y].setText(String.valueOf(x + 1 + y * 7));
             }
         }
     }

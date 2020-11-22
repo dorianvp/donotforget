@@ -1,6 +1,7 @@
 package donotforget.layout.MainViewPanels.HeaderBar;
 
 import donotforget.components.Button.CalendarButton;
+import donotforget.layout.MainView;
 import donotforget.layout.MainViewPanels.HeaderBar.NavigationButtons.NavigationButtons;
 import donotforget.layout.MainViewPanels.HeaderBar.ScaleButtons.ScaleButtons;
 import javafx.geometry.HPos;
@@ -16,12 +17,14 @@ import javafx.scene.layout.RowConstraints;
 public class HeaderBar extends GridPane {
     private CalendarButton btnConfig = new CalendarButton("O", "white-button");
 
-    private NavigationButtons nav = new NavigationButtons();
+    private NavigationButtons nav;
     private ScaleButtons sv = new ScaleButtons();
+    private MainView parent = null;
     
-
-    public HeaderBar() {
+    public HeaderBar(MainView parent) {
         super();
+        this.parent = parent;
+        this.nav = new NavigationButtons(this.parent);
 
         this.add(this.btnConfig, 0, 0, 1, 1);
 
@@ -64,5 +67,8 @@ public class HeaderBar extends GridPane {
         this.getStylesheets().add(css);
         this.setMaxHeight(Double.MAX_VALUE);
         this.setAlignment(Pos.CENTER);
+
+        
     }
+
 }
