@@ -1,0 +1,40 @@
+@import "../global/colors.less";
+@import '../components/label.less';
+
+.button {
+    -fx-background-color: @grey;
+    -fx-transition: 600ms;
+    -fx-background-radius: 0;
+    &:hover {
+        -fx-background-color: @blue;
+        -fx-cursor: hand;
+        -fx-text-fill: @white;
+    }
+    &:pressed {
+        -fx-background-color: @dark-blue;
+    }
+}
+
+.white-button {
+    .button();
+    -fx-background-color: @white;
+    -fx-padding: 10;
+}
+
+.toggle-button {
+    .white-button();
+    &:hover {
+        -fx-background-color: @grey;
+        -fx-text-fill: @black;
+    }
+    &:selected{
+        -fx-background-color: @blue;
+        -fx-cursor: hand;
+        -fx-text-fill: @white;
+    }
+}
+
+.label-button {
+    .white-button();
+    .white-label();
+}

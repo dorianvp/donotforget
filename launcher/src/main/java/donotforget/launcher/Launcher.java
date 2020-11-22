@@ -13,38 +13,55 @@ import java.rmi.registry.Registry;
 
 public class Launcher {
     public static void main(String[] args) {
-        startClient();
-        /* 
         if(isServerRunning()) {
+            System.out.println("Server is Running...");
             startClient();
         } else {
             startServer();
-        } */
+            System.out.println("Server is not Running...");
+        }
     }
 
     private static boolean isServerRunning() {
         try {
-            Registry r = LocateRegistry.getRegistry(1099);
+            Registry r = LocateRegistry.getRegistry();
             r.lookup("checker");
             return true;
         } catch (NotBoundException nbe) {
             System.out.println("Cannot find remote object");
-            //System.out.println("Error: " + nbe);
+            System.out.println("Error: " + nbe);
         } catch (RemoteException re) {
             System.out.println("Cannot connect to RmiRegistry.");
-            //System.out.println("Error: " + re);
+            System.out.println("Error: " + re);
         }
         return false;
     }
 
     private static boolean startServer() {
         try {
-            Runtime.getRuntime().exec("java -jar server.jar");
-            System.out.println("Starting server...");
+        
+            Path p = Paths.get(Launcher.class.getProtectionDomain().getCodeSource().getLocation()
+            .toURI());
+            System.out.println(p.getParent().toString());
+            Process proc = Runtime.getRuntime().exec("java -jar " + p.getParent() + "\\Server.jar");
+            StreamGobbler errorGobbler = new 
+                StreamGobbler(proc.getErrorStream(), "ERROR");            
+            
+            // any output?
+            StreamGobbler outputGobbler = new 
+                StreamGobbler(proc.getInputStream(), "OUTPUT");
+                
+            // kick them off
+            errorGobbler.start();
+            outputGobbler.start();
+
+    
         } catch (IOException ioe) {
             System.out.println("Cannot start server.jar");
             System.out.println("Error: " + ioe);
             return false;
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
         }
         return true;
     }
@@ -58,11 +75,9 @@ public class Launcher {
             StreamGobbler errorGobbler = new 
                 StreamGobbler(proc.getErrorStream(), "ERROR");            
             
-            // any output?
             StreamGobbler outputGobbler = new 
                 StreamGobbler(proc.getInputStream(), "OUTPUT");
                 
-            // kick them off
             errorGobbler.start();
             outputGobbler.start();
 

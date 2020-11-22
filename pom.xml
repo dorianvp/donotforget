@@ -4,7 +4,7 @@
     
 
 
-    <groupId>com.donotforget</groupId>
+    <groupId>donotforget</groupId>
     <artifactId>donotforget</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>

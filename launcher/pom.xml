@@ -7,7 +7,7 @@
 	<!-- parent pom -->
     <parent>
         <artifactId>donotforget</artifactId>
-        <groupId>com.donotforget</groupId>
+        <groupId>donotforget</groupId>
         <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -30,7 +30,8 @@
                             <mainClass>donotforget.launcher.Launcher</mainClass>
                         </manifest>
                     </archive>
-				</configuration>
+                    <finalName>Launcher</finalName>
+                </configuration>
 			</plugin>
 
 		</plugins>

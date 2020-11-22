@@ -1,0 +1,17 @@
+@import "../global/colors.less";
+
+.label {
+    -fx-background-color: @white;
+    -fx-padding: 10;
+}
+
+.white-label {
+    .label();
+    -fx-padding: 5;
+    -fx-border-width: 1;
+    -fx-border-color: @grey;
+
+    &:active {
+        -fx-background-color: @dark-grey;
+    }
+}

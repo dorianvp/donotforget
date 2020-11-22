@@ -7,7 +7,7 @@
 	<!-- parent pom -->
     <parent>
         <artifactId>donotforget</artifactId>
-        <groupId>com.donotforget</groupId>
+        <groupId>donotforget</groupId>
         <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -20,17 +20,25 @@
 
 	<!-- password info -->
     <groupId>donotforget.client</groupId>
-    <artifactId>donotforget.client</artifactId>
+    <artifactId>client</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
 
     <dependencies>
+        
         <dependency>
           <groupId>org.openjfx</groupId>
           <artifactId>javafx-controls</artifactId>
           <version>${javafx.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>donotforget.remote</groupId>
+            <artifactId>remote</artifactId>
+            <version>1.0</version>
+        </dependency>
+
     </dependencies>
       
     <build>
@@ -52,7 +60,7 @@
                     <mainClass>client.Launcher</mainClass>
                 </configuration>
             </plugin>
-              
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -71,6 +79,10 @@
                                 <transformer implementation=
                                                      "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>donotforget.client.Launcher</mainClass>
+                                </transformer>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.IncludeResourceTransformer">
+                                    <resource>src/main/resources/styles.css</resource>
+                                    <file>styles.css</file>
                                 </transformer>
                             </transformers>
                         </configuration>
