@@ -2,4 +2,4 @@
 shade/
 .settings/
 target/
-dist/
+dist/local.db
