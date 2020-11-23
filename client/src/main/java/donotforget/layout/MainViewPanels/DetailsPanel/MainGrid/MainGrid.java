@@ -78,11 +78,8 @@ public class MainGrid extends GridPane {
                 c.setText("");
             }
         }
-
-        for (int y = 0; y < 6; y++) {
-            GregorianCalendar g = new GregorianCalendar();
-            System.out.println(counter);
- 
+        GregorianCalendar g = new GregorianCalendar();
+        for (int y = 0; y < 6; y++) { 
             for (int x = 0; x < 7; x++) {
                 if (counter > parent.navigationDate.getMonth().length(g.isLeapYear(parent.navigationDate.getYear()))) { 
                     // labels[x][y] = new CalendarButton("", "disabled-label");
@@ -90,8 +87,7 @@ public class MainGrid extends GridPane {
                 } else {
                     if (y == 0 && x == 0) {
                         x = parent.navigationDate.withDayOfMonth(1).getDayOfWeek().getValue() - 1;
-                    }
-                    
+                    }                    
                     // parent.navigationDate.withDayOfMonth(1).getDayOfWeek().getValue();
                     labels[x][y].setText(String.valueOf(counter));
                 }

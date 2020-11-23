@@ -13,7 +13,7 @@ public class ServerWrapper {
     public List<Categoria> getCategorias() {
         try {
             this.reg = LocateRegistry.getRegistry(null);
-            Categorias cat = (Categorias) reg.lookup("Hello");
+            Categorias cat = (Categorias) reg.lookup("categorias-server");
             return cat.getCategorias();
         } catch(Exception e) {
             e.printStackTrace();

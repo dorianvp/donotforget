@@ -31,11 +31,11 @@ public class TopPanel extends BorderPane {
 
     private EventHandler<ActionEvent> onAdd = new EventHandler<ActionEvent>() {
         public void handle(ActionEvent e) {
-            System.out.println("AddEvent");
+            //System.out.println("AddEvent");
 
             Dialog<String> d = new Dialog<>();
             
-            d.initStyle(StageStyle.TRANSPARENT);
+            d.initStyle(StageStyle.UTILITY);
 
             // TODO: Agregar estilos al dialogo.
 

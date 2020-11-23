@@ -19,8 +19,10 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
 import donotforget.remote.Categorias;
+import donotforget.remote.Eventos;
 import donotforget.remote.ServerChecker;
 import donotforget.server.implementations.CategoriasServer;
+import donotforget.server.implementations.EventsServer;
 
 public class ServerMain {
     private Registry r;
@@ -101,13 +103,19 @@ public class ServerMain {
     private static void bindObjects() {
         try {
             CategoriasServer cs = new CategoriasServer();
+            EventsServer es = new EventsServer();
 
-            Categorias cat = (Categorias) UnicastRemoteObject.exportObject(cs, 0);
+            Eventos e = (Eventos) UnicastRemoteObject.exportObject(es, 0);
+            Categorias c = (Categorias) UnicastRemoteObject.exportObject(cs, 0);
 
             Registry registry;
             registry = LocateRegistry.getRegistry();
-            registry.bind("Hello", cat);  
+            registry.bind("categorias-server", c);  
             System.err.println("Binded categorias"); 
+
+            registry.bind("events-server", e);  
+            System.err.println("Binded eventos"); 
+
         } catch (Exception e) {
             e.printStackTrace();
         }
