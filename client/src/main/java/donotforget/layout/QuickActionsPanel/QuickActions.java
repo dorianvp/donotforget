@@ -7,6 +7,9 @@ import javafx.event.EventHandler;
 
 import java.util.List;
 
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
+
 import donotforget.ServerWrapper.ServerWrapper;
 import donotforget.commons.Categoria;
 import donotforget.commons.Evento;
@@ -19,6 +22,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -26,6 +30,7 @@ import javafx.scene.control.cell.ComboBoxListCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.StageStyle;
 
@@ -38,13 +43,19 @@ public class QuickActions extends BorderPane {
         @Override
         public void handle(MouseEvent e) {
 
-            Dialog<Evento> d = new Dialog<>();
-            d.initStyle(StageStyle.DECORATED);
-            d.getDialogPane().setContent(new NewElementDialog());
+            System.out.println(QuickActions.this.getParent().getParent().getParent());
 
-            d.getDialogPane().setPadding(new Insets(20, 20, 20, 20));
-
-            d.setTitle("Nuevo Elemento");
+            JFXDialogLayout layout = new JFXDialogLayout();
+            layout.setHeading(new Label("Header"));
+            layout.setBody(new Label("Lorem ipsum"));
+                    
+            NewElementDialog d = new NewElementDialog(
+                (StackPane) QuickActions.this.getParent().getParent().getParent(),
+                layout,
+                JFXDialog.DialogTransition.RIGHT
+            );
+            
+            // // d.setTitle("Nuevo Elemento");
 
             
 
