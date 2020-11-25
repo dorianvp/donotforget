@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
+import com.jfoenix.controls.JFXTabPane;
 
 import donotforget.ServerWrapper.ServerWrapper;
 import donotforget.commons.Categoria;
@@ -24,6 +25,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.cell.ComboBoxListCell;
@@ -45,14 +47,11 @@ public class QuickActions extends BorderPane {
 
             System.out.println(QuickActions.this.getParent().getParent().getParent());
 
-            JFXDialogLayout layout = new JFXDialogLayout();
-            layout.setHeading(new Label("Header"));
-            layout.setBody(new Label("Lorem ipsum"));
+            
                     
             NewElementDialog d = new NewElementDialog(
                 (StackPane) QuickActions.this.getParent().getParent().getParent(),
-                layout,
-                JFXDialog.DialogTransition.RIGHT
+                JFXDialog.DialogTransition.CENTER
             );
             
             // // d.setTitle("Nuevo Elemento");
