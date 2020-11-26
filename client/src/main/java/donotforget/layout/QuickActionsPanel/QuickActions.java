@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 
 import java.util.List;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXTabPane;
@@ -37,7 +38,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.StageStyle;
 
 public class QuickActions extends BorderPane {
-    private CalendarButton btnAdd = new CalendarButton("Nuevo elemento");
+    private JFXButton btnAdd = new JFXButton("Nuevo elemento");
     private TopPanel bPanelTop = new TopPanel(this);
     private QAListView lv = new QAListView();
 

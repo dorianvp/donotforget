@@ -5,13 +5,11 @@ import java.time.LocalDateTime;
 import donotforget.layout.MainViewPanels.DetailsPanel.DetailsPanel;
 import donotforget.layout.MainViewPanels.DetailsPanel.MainGrid.MainGrid;
 import donotforget.layout.MainViewPanels.HeaderBar.HeaderBar;
-import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.VBox;
 
 public class MainView extends GridPane {
     private HeaderBar header;

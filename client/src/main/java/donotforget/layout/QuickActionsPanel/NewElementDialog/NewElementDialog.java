@@ -1,70 +1,98 @@
 package donotforget.layout.QuickActionsPanel.NewElementDialog;
 
-import java.util.stream.Stream;
-import java.util.Optional;
-
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
-import com.jfoenix.controls.JFXTabPane;
+import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXButton.ButtonType;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.Window;
+import tornadofx.control.DateTimePicker;
 
 public class NewElementDialog extends JFXDialog {
 
     private JFXDialogLayout layout = new JFXDialogLayout();
+    private JFXTextField titulo = new JFXTextField();
+    private JFXTextArea txtDescripcion = new JFXTextArea();
+    private JFXButton btnAgregar = new JFXButton("Agregar");
+    private JFXButton btnCancelar = new JFXButton("Cancelar");
+    private VBox contentLayout = new VBox();
+    private DateTimePicker dateDesde = new DateTimePicker();
+    private DateTimePicker dateHasta = new DateTimePicker();
+
+    private HBox desde = new HBox();
+    private Label lblDesde = new Label("Desde: ");
+
+    private HBox hasta = new HBox();
+    private Label lblHasta = new Label("Hasta: ");
     
     public NewElementDialog(StackPane container, DialogTransition content) {
         super(container, null, content, false);
 
         this.setDialogContainer(container);
-        this.setTransitionType(JFXDialog.DialogTransition.RIGHT);
+        this.setTransitionType(JFXDialog.DialogTransition.CENTER);
         this.setContent(this.layout);
 
 
-        layout.setBody(new Label("Lorem ipsum"));
+        this.btnAgregar.setId("btn-agregar");
+        this.btnCancelar.setId("btn-cancelar");
 
-        JFXButton button = new JFXButton("Okay");
+        this.titulo.setPromptText("Título");
+
+        this.lblDesde.setPrefWidth(120);
+        this.lblHasta.setPrefWidth(120);
         
-        button.setButtonType(ButtonType.RAISED);
-        button.setOnAction(new EventHandler<ActionEvent>(){
+        btnAgregar.setButtonType(ButtonType.FLAT);
+        this.btnCancelar.setButtonType(ButtonType.FLAT);
+
+        btnCancelar.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent event){
                 NewElementDialog.this.close();
             }
         });
+
+        btnAgregar.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent event){
+
+                NewElementDialog.this.close();
+            }
+        });
+
         this.setPrefSize(400, 300);
-        layout.setActions(button);
+        layout.setActions(btnCancelar, btnAgregar);
 
 
-        JFXTabPane tabs = new JFXTabPane();
+        this.dateDesde.setPromptText("Desde");
+        this.dateHasta.setPromptText("Hasta");
+        this.txtDescripcion.setPromptText("Descripción");
 
-        tabs.getStyleClass().add("tab-pane");
-
-        Tab evento = new Tab();
-        evento.setText("Evento");
-        evento.setContent(new Label("Content"));
-
-        Tab recordatorio = new Tab();
-        recordatorio.setText("Recordatorio");
-        recordatorio.setContent(new Label("Content"));
+        this.txtDescripcion.setId("input-descripcion");
         
-        tabs.getTabs().addAll(evento, recordatorio);
+        this.txtDescripcion.setMaxWidth(Double.MAX_VALUE);
+        //datePicker.setOverLay(true);
+        this.desde.setAlignment(Pos.CENTER_LEFT);
+        this.desde.getChildren().addAll(lblDesde, dateDesde);
 
-        layout.setBody(tabs);
+        this.hasta.getChildren().addAll(lblHasta, dateHasta);
+        this.hasta.setAlignment(Pos.CENTER_LEFT);
+
+        //datePicker.setDefaultColor(Color.valueOf("#3f51b5"));
+        this.contentLayout.setSpacing(10);
+
+        this.contentLayout.getChildren().addAll(titulo, desde, hasta, txtDescripcion);
+
+
+
+        layout.setBody(contentLayout);
     }
 
 
