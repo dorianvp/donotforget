@@ -13,6 +13,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.Border;
@@ -25,7 +26,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.StageStyle;
 
 public class TopPanel extends BorderPane {
-    private CalendarButton btnCategorias = new CalendarButton("Categorías");
+    private Label lblCategorias = new Label("Categorías");
     private CalendarButton btnAddCategoria = new CalendarButton("+");
     private QuickActions p;
 
@@ -58,7 +59,7 @@ public class TopPanel extends BorderPane {
 
             VBox l = new VBox();
             l.setSpacing(20);
-            l.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, null, null))); 
+            //l.setBorder(new Border(new BorderStroke(Color.RED, BorderStrokeStyle.SOLID, null, null))); 
 
             HBox h = new HBox();
             h.setSpacing(10);
@@ -91,6 +92,10 @@ public class TopPanel extends BorderPane {
                 if (sw.addCategoria(new Categoria(((TextField) ((HBox) ((VBox) d.getDialogPane().getContent()).getChildren().get(0)).getChildren().get(0)).getText()))) {
                     System.out.println("Categoria añadida ");
                     p.loadCategories();
+                } else {
+                    //TODO: add JFXInputField here, validation and error messages!!!
+                    //((TextField) ((HBox) ((VBox) d.getDialogPane().getContent()).getChildren().get(0)).getChildren().get(0);
+                    ae.consume();
                 }
             });
 
@@ -108,12 +113,16 @@ public class TopPanel extends BorderPane {
         this.setMaxWidth(Double.MAX_VALUE);
         this.setMaxHeight(Double.MAX_VALUE);
         
-        this.btnCategorias.setMaxWidth(Double.MAX_VALUE);
-        BorderPane.setAlignment(btnCategorias, Pos.CENTER);
+        this.lblCategorias.setMaxWidth(Double.MAX_VALUE);
+        this.lblCategorias.setMaxHeight(Double.MAX_VALUE);
+        BorderPane.setAlignment(lblCategorias, Pos.CENTER);
 
+        this.lblCategorias.getStyleClass().add("grey-label");
 
-        this.setCenter(this.btnCategorias);
+        this.setCenter(this.lblCategorias);
         this.setRight(this.btnAddCategoria);
+
+        this.btnAddCategoria.setMaxHeight(Double.MAX_VALUE);
         
         this.btnAddCategoria.setOnAction(this.onAdd);
 

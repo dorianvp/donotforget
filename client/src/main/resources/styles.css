@@ -111,6 +111,19 @@
   -fx-padding: 10;
   -fx-background-color: '#F1F1F1';
 }
+.grey-label {
+  -fx-background-color: '#FFFFFF';
+  -fx-padding: 10;
+  -fx-padding: 5;
+  -fx-border-width: 1;
+  -fx-border-color: '#F1F1F1';
+  -fx-padding: 10px;
+  -fx-border-width: 0;
+  -fx-background-color: '#DCDADA';
+}
+.grey-label:active {
+  -fx-background-color: '#DCDADA';
+}
 .jfx-tab-pane .headers-region {
   -fx-background-color: #ffffff;
 }
