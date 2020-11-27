@@ -1,0 +1,35 @@
+@import '../global/colors.less';
+
+.jfx-text-area {
+    -fx-background-color: @white;
+    padding: 1em;
+
+    &:hover {
+        -fx-background-color: @grey;
+    }
+
+    &:focused {
+        -fx-background-color: @grey;
+        -jfx-focus-color: @blue;
+    }
+}
+
+.jfx-text-area .content,
+.jfx-text-area:focused .content{
+    -fx-padding: 0.5em 0.5em 0.5em 0.5em;
+}
+
+.jfx-text-field {
+    &:hover {
+        -fx-background-color: @grey;
+    }
+
+    &:focused {
+        -fx-background-color: @grey;
+        -jfx-focus-color: @blue;
+    }
+}
+
+.jfx-text-field:focused .content{
+    -fx-padding: 0.5em 0.5em 0.5em 0.5em;
+}

@@ -71,6 +71,24 @@
 .label-button:active {
   -fx-background-color: '#DCDADA';
 }
+#btn-agregar {
+  -fx-background-color: '#2483FF';
+  -fx-text-fill: '#FFFFFF';
+  -fx-background-radius: 6px;
+  -fx-border-radius: 6px;
+  -fx-border-width: 0px;
+  -fx-border-color: '#2483FF';
+  -fx-effect: dropshadow(gaussian, rgba(36, 131, 255, 0.6), 6, 0, 0, 0);
+}
+#btn-cancelar {
+  -fx-background-color: '#848484';
+  -fx-text-fill: '#FFFFFF';
+  -fx-background-radius: 6px;
+  -fx-border-radius: 6px;
+  -fx-border-width: 0px;
+  -fx-border-color: '#848484';
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 6, 0, 0, 0);
+}
 .header {
   -fx-background-color: '#F1F1F1';
 }
@@ -88,6 +106,62 @@
 .white-label:active {
   -fx-background-color: '#DCDADA';
 }
-.root {
-  -fx-background-color: #34f0e6;
+.disabled-label {
+  -fx-background-color: '#FFFFFF';
+  -fx-padding: 10;
+  -fx-background-color: '#F1F1F1';
+}
+.grey-label {
+  -fx-background-color: '#FFFFFF';
+  -fx-padding: 10;
+  -fx-padding: 5;
+  -fx-border-width: 1;
+  -fx-border-color: '#F1F1F1';
+  -fx-padding: 10px;
+  -fx-border-width: 0;
+  -fx-background-color: '#DCDADA';
+}
+.grey-label:active {
+  -fx-background-color: '#DCDADA';
+}
+.jfx-tab-pane .headers-region {
+  -fx-background-color: #ffffff;
+}
+.jfx-tab-pane .tab-header-background {
+  -fx-background-color: #ffffff;
+}
+.jfx-tab-pane .tab-selected-line {
+  -fx-background-color: '#2483FF';
+}
+.jfx-tab-pane .tab .tab-label {
+  -fx-text-fill: '#000000';
+  -fx-font-weight: normal;
+}
+.jfx-tab-pane .tab:selected .tab-label {
+  -fx-text-fill: '#2483FF';
+}
+.jfx-text-area {
+  -fx-background-color: '#FFFFFF';
+  padding: 1em;
+}
+.jfx-text-area:hover {
+  -fx-background-color: '#F1F1F1';
+}
+.jfx-text-area:focused {
+  -fx-background-color: '#F1F1F1';
+  -jfx-focus-color: '#2483FF';
+}
+.jfx-text-area .content,
+.jfx-text-area:focused .content {
+  -fx-padding: 0.5em 0.5em 0.5em 0.5em;
+}
+.jfx-text-field:hover {
+  -fx-background-color: '#F1F1F1';
+}
+.jfx-text-field:focused {
+  -fx-background-color: '#F1F1F1';
+  -jfx-focus-color: '#2483FF';
+}
+.jfx-text-field:focused .content {
+  -fx-padding: 0.5em 0.5em 0.5em 0.5em;
 }

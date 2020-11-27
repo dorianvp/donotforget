@@ -6,13 +6,13 @@ import javafx.scene.layout.GridPane;
 
 public class DayBar extends GridPane {
     private CalendarLabel[] labels = {
-        new CalendarLabel("Do", "white-label"),
         new CalendarLabel("Lu", "white-label"),
         new CalendarLabel("Ma", "white-label"),
         new CalendarLabel("Mi", "white-label"),
         new CalendarLabel("Ju", "white-label"),
         new CalendarLabel("Vi", "white-label"),
-        new CalendarLabel("Sa", "white-label")
+        new CalendarLabel("Sa", "white-label"),
+        new CalendarLabel("Do", "white-label")
     };
     public DayBar() {
         super();

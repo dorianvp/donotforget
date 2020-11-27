@@ -11,23 +11,16 @@ public class Navigation extends GridPane {
         super();
         this.setMinHeight(200);
 
-
-        RowConstraints c1 = new RowConstraints();
-        c1.setPercentHeight(50);
-        c1.setFillHeight(true);
-        c1.setVgrow(Priority.ALWAYS);
-
         RowConstraints c2 = new RowConstraints();
-        c2.setPercentHeight(50);
+        c2.setPercentHeight(100);
         c2.setFillHeight(true);
         c2.setVgrow(Priority.ALWAYS);
 
-        this.getRowConstraints().add(c1);
         this.getRowConstraints().add(c2);
         
 
 
-        this.add(qa, 0, 1);
+        this.add(qa, 0, 0);
         this.setMinWidth(0);
         this.setPrefWidth(300);
 
