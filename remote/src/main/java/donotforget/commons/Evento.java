@@ -14,13 +14,12 @@ public class Evento implements Serializable {
     private LocalDateTime fecha_finalizacion;
     private LocalTime tiempo_aviso_previo;
 
-    public Evento(int c, String t, String d, LocalDateTime i, LocalDateTime f, LocalTime a) {
+    public Evento(int c, String t, String d, LocalDateTime i, LocalDateTime f) {
         this.id_categoria = c;
         this.titulo = t;
         this.descripcion = d;
         this.fecha_inicio = i;
         this.fecha_finalizacion = f;
-        this.tiempo_aviso_previo = a;
     }
 
     public int getId_evento() {

@@ -5,7 +5,9 @@ import java.rmi.registry.Registry;
 import java.util.List;
 
 import donotforget.commons.Categoria;
+import donotforget.commons.Evento;
 import donotforget.remote.Categorias;
+import donotforget.remote.Eventos;
 
 public class ServerWrapper {
     private Registry reg;
@@ -24,7 +26,7 @@ public class ServerWrapper {
     public boolean addCategoria(Categoria c) {
         try {
             this.reg = LocateRegistry.getRegistry(null);
-            Categorias cat = (Categorias) reg.lookup("Hello");
+            Categorias cat = (Categorias) reg.lookup("categorias-server");
             if(cat.addCategoria(c)) {
                 System.out.println("true en sw");
                 return true;
@@ -32,6 +34,21 @@ public class ServerWrapper {
             return false;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean addEvent(Evento e) {
+        try {
+            this.reg = LocateRegistry.getRegistry(null);
+            Eventos eventos = (Eventos) reg.lookup("eventos-server");
+            if (eventos.addEvent(e)) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
             return false;
         }
     }

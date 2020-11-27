@@ -38,8 +38,7 @@ public class EventsServer implements Eventos {
                     rs.getString("titulo"),
                     rs.getString("descripcion"),
                     LocalDateTime.parse(rs.getString("fecha_inicio"), formatter),
-                    LocalDateTime.parse(rs.getString("fecha_finalizacion"), formatter),
-                    LocalTime.parse(rs.getString("tiempo_aviso_previo"))
+                    LocalDateTime.parse(rs.getString("fecha_finalizacion"), formatter)
                 ));
             }
 
