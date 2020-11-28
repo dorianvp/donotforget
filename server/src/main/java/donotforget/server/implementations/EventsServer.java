@@ -68,13 +68,13 @@ public class EventsServer implements Eventos {
         try {
             DatabaseWrapper d = new DatabaseWrapper();
             Connection c = d.connect();
-            PreparedStatement s = c.prepareStatement("INSERT INTO Evento (id_categoria, titulo, descripcion, fecha_inicio, fecha_finalizacion, tiempo_aviso_previo) VALUES (?, ?, ?, ?, ?, ?)");
+            PreparedStatement s = c.prepareStatement("INSERT INTO Evento (id_categoria, titulo, descripcion, fecha_inicio, fecha_finalizacion, tiempo_aviso_previo) VALUES (?, ?, ?, ?, ?, null)");
             s.setInt(1, e.getCategoria());
             s.setString(2, e.getTitulo());
             s.setString(3, e.getDescripcion());
             s.setString(4, e.getFechaInicio().format(DateTimeFormatter.ISO_DATE_TIME));
             s.setString(5, e.getFechaFinalizacion().format(DateTimeFormatter.ISO_DATE_TIME));
-            s.setString(6, e.getTiempoAvisoPrevio().format(DateTimeFormatter.ISO_DATE_TIME));
+            // s.setString(6, e.getTiempoAvisoPrevio().format(DateTimeFormatter.ISO_DATE_TIME));
 
             s.executeUpdate();
             s.close();

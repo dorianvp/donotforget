@@ -20,9 +20,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 import tornadofx.control.DateTimePicker;
 
 public class NewElementDialog extends JFXDialog {
@@ -36,7 +39,7 @@ public class NewElementDialog extends JFXDialog {
     private DateTimePicker dateDesde = new DateTimePicker();
     private DateTimePicker dateHasta = new DateTimePicker();
     private JFXCheckBox isEvent = new JFXCheckBox("Evento");
-    private JFXComboBox categorias = new JFXComboBox<>();
+    private JFXComboBox<Categoria> cmbCategorias = new JFXComboBox<Categoria>();
 
     private HBox desde = new HBox();
     private Label lblDesde = new Label("Desde: ");
@@ -51,7 +54,7 @@ public class NewElementDialog extends JFXDialog {
         this.setTransitionType(JFXDialog.DialogTransition.CENTER);
         this.setContent(this.layout);
 
-        
+        this.loadCategorias();
 
 
         this.btnAgregar.setId("btn-agregar");
@@ -77,7 +80,7 @@ public class NewElementDialog extends JFXDialog {
             public void handle(ActionEvent event){
                 if (NewElementDialog.this.isEvent.isSelected()) {
                     Evento e = new Evento(
-                        (int) NewElementDialog.this.categorias.getValue(),
+                        ((Categoria) NewElementDialog.this.cmbCategorias.getValue()).getId(),
                         NewElementDialog.this.titulo.getText(),
                         NewElementDialog.this.txtDescripcion.getText(),
                         NewElementDialog.this.dateDesde.getValue().atTime(LocalTime.now()),
@@ -116,9 +119,29 @@ public class NewElementDialog extends JFXDialog {
         //datePicker.setDefaultColor(Color.valueOf("#3f51b5"));
         this.contentLayout.setSpacing(10);
 
-        this.contentLayout.getChildren().addAll(titulo, isEvent, categorias, desde, hasta, txtDescripcion);
+        this.contentLayout.getChildren().addAll(titulo, isEvent, cmbCategorias, desde, hasta, txtDescripcion);
 
 
+        this.cmbCategorias.setCellFactory(new Callback<ListView<Categoria>,ListCell<Categoria>>(){
+            @Override
+            public ListCell<Categoria> call(ListView<Categoria> l) {
+                return new ListCell<Categoria>() {
+
+                    @Override
+                    protected void updateItem(Categoria item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item == null || empty) {
+                            setGraphic(null);
+                            setText(null);
+                        } else {
+                            setText(item.getNombre());
+                        }
+                    }
+                } ;
+            }
+        });
+
+        this.cmbCategorias.setButtonCell(this.cmbCategorias.getCellFactory().call(null));
 
         layout.setBody(contentLayout);
     }
@@ -134,7 +157,7 @@ public class NewElementDialog extends JFXDialog {
         for (Categoria categoria : l) {
             System.out.println("ID: " + categoria.getId());
             System.out.println("Nombre: " + categoria.getNombre());
-            this.categorias.getItems().add(categoria.getNombre());
+            this.cmbCategorias.getItems().add(categoria);
         }
         
     }

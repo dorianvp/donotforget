@@ -41,7 +41,7 @@ public class ServerWrapper {
     public boolean addEvent(Evento e) {
         try {
             this.reg = LocateRegistry.getRegistry(null);
-            Eventos eventos = (Eventos) reg.lookup("eventos-server");
+            Eventos eventos = (Eventos) reg.lookup("events-server");
             if (eventos.addEvent(e)) {
                 return true;
             } else {
