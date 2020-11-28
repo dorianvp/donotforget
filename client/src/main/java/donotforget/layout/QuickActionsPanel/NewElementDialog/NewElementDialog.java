@@ -19,6 +19,7 @@ import donotforget.commons.Evento;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -39,16 +40,20 @@ public class NewElementDialog extends JFXDialog {
     private DateTimePicker dateDesde = new DateTimePicker();
     private DateTimePicker dateHasta = new DateTimePicker();
     private JFXCheckBox isEvent = new JFXCheckBox("Evento");
-    private JFXComboBox<Categoria> cmbCategorias = new JFXComboBox<Categoria>();
+    private ComboBox<Categoria> cmbCategorias = new ComboBox<Categoria>();
 
     private HBox desde = new HBox();
     private Label lblDesde = new Label("Desde: ");
 
     private HBox hasta = new HBox();
     private Label lblHasta = new Label("Hasta: ");
+
+    private StackPane container;
     
     public NewElementDialog(StackPane container, DialogTransition content) {
         super(container, null, content, false);
+
+        this.container = container;
 
         this.setDialogContainer(container);
         this.setTransitionType(JFXDialog.DialogTransition.CENTER);
@@ -61,6 +66,7 @@ public class NewElementDialog extends JFXDialog {
         this.btnCancelar.setId("btn-cancelar");
 
         this.titulo.setPromptText("Título");
+        this.cmbCategorias.setPrefWidth(300);
 
         this.lblDesde.setPrefWidth(120);
         this.lblHasta.setPrefWidth(120);
@@ -78,22 +84,22 @@ public class NewElementDialog extends JFXDialog {
         btnAgregar.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent event){
-                if (NewElementDialog.this.isEvent.isSelected()) {
-                    Evento e = new Evento(
-                        ((Categoria) NewElementDialog.this.cmbCategorias.getValue()).getId(),
-                        NewElementDialog.this.titulo.getText(),
-                        NewElementDialog.this.txtDescripcion.getText(),
-                        NewElementDialog.this.dateDesde.getValue().atTime(LocalTime.now()),
-                        NewElementDialog.this.dateHasta.getValue().atTime(LocalTime.now())
+                Evento e = new Evento(
+                    ((Categoria) NewElementDialog.this.cmbCategorias.getValue()).getId(),
+                    NewElementDialog.this.titulo.getText(),
+                    NewElementDialog.this.txtDescripcion.getText(),
+                    NewElementDialog.this.dateDesde.getValue().atTime(LocalTime.now()),
+                    NewElementDialog.this.dateHasta.getValue().atTime(LocalTime.now())
+                );
+                ServerWrapper sw = new ServerWrapper();
+                if (!sw.addEvent(e)) {
+                    JFXDialog dlgError = new JFXDialog(
+                        NewElementDialog.this.container, 
+                        new Label("Se produjo un error al agregar el elemento indicado."),
+                        DialogTransition.CENTER
                     );
-                    ServerWrapper sw = new ServerWrapper();
-                    if (!sw.addEvent(e)) {
-                        //MOstrar un error
-                    };
-                } else {
-                    // Si el usuario quiere agregar un recordatorio
-
-                }
+                    dlgError.show();
+                };
                 NewElementDialog.this.close();
             }
         });
@@ -119,10 +125,18 @@ public class NewElementDialog extends JFXDialog {
         //datePicker.setDefaultColor(Color.valueOf("#3f51b5"));
         this.contentLayout.setSpacing(10);
 
-        this.contentLayout.getChildren().addAll(titulo, isEvent, cmbCategorias, desde, hasta, txtDescripcion);
+        this.btnAgregar.disableProperty().bind((
+            titulo.textProperty().isNotEmpty()
+            .and(txtDescripcion.textProperty().isNotEmpty())
+            .and(dateDesde.valueProperty().isNotNull())
+            .and(dateHasta.valueProperty().isNotNull())
+            .and(cmbCategorias.valueProperty().isNotNull())
+        ).not());
+
+        this.contentLayout.getChildren().addAll(titulo, cmbCategorias, desde, hasta, txtDescripcion);
 
 
-        this.cmbCategorias.setCellFactory(new Callback<ListView<Categoria>,ListCell<Categoria>>(){
+        this.cmbCategorias.setCellFactory(new Callback<ListView<Categoria>, ListCell<Categoria>>(){
             @Override
             public ListCell<Categoria> call(ListView<Categoria> l) {
                 return new ListCell<Categoria>() {
@@ -132,7 +146,8 @@ public class NewElementDialog extends JFXDialog {
                         super.updateItem(item, empty);
                         if (item == null || empty) {
                             setGraphic(null);
-                            setText(null);
+                            setText("Selecciona una categoría");
+                            NewElementDialog.this.cmbCategorias.setPromptText("Seleccione una Categoría");
                         } else {
                             setText(item.getNombre());
                         }
@@ -140,7 +155,6 @@ public class NewElementDialog extends JFXDialog {
                 } ;
             }
         });
-
         this.cmbCategorias.setButtonCell(this.cmbCategorias.getCellFactory().call(null));
 
         layout.setBody(contentLayout);

@@ -14,7 +14,7 @@ public class CategoryCell extends ListCell<Categoria> {
     private BorderPane bp = new BorderPane();
     private CheckBox cb = new CheckBox();
     private Button btnRemove = new Button("X");
-    Categoria lastItem;
+    private Categoria lastItem;
 
     public CategoryCell() {
         super();
@@ -52,4 +52,16 @@ public class CategoryCell extends ListCell<Categoria> {
             System.out.println(((CategoryCell)((Button) e.getSource()).getParent().getParent()).getLastItem().getId());
         }
     };
+
+    public CheckBox getCb() {
+        return cb;
+    }
+
+    public void setCb(CheckBox cb) {
+        this.cb = cb;
+    }
+
+    public void setLastItem(Categoria lastItem) {
+        this.lastItem = lastItem;
+    }
 }

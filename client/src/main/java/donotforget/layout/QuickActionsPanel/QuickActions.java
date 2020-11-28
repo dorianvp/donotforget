@@ -55,10 +55,6 @@ public class QuickActions extends BorderPane {
                 JFXDialog.DialogTransition.CENTER
             );
             
-            // // d.setTitle("Nuevo Elemento");
-
-            
-
             d.show();
 
         }
@@ -95,6 +91,14 @@ public class QuickActions extends BorderPane {
             System.out.println("Nombre: " + categoria.getNombre());
         }
         this.lv.setItems(l);
+    }
+
+    public QAListView getLv() {
+        return lv;
+    }
+
+    public void setLv(QAListView lv) {
+        this.lv = lv;
     }
 
     

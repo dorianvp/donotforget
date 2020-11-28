@@ -2,6 +2,7 @@ package donotforget.ServerWrapper;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.time.LocalDate;
 import java.util.List;
 
 import donotforget.commons.Categoria;
@@ -50,6 +51,17 @@ public class ServerWrapper {
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
+        }
+    }
+
+    public List<Evento> getEventsFromMonth(LocalDate month, List<Categoria> categorias) {
+        try {
+            this.reg = LocateRegistry.getRegistry(null);
+            Eventos eventsStub = (Eventos) reg.lookup("events-server");
+            return eventsStub.getEventsFromMonth(month, categorias);
+        } catch(Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

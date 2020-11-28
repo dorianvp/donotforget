@@ -28,4 +28,12 @@ public class Navigation extends GridPane {
         this.setStyle("-fx-background-color: blue;");
     }
 
+    public QuickActions getQa() {
+        return qa;
+    }
+
+    public void setQa(QuickActions qa) {
+        this.qa = qa;
+    }
+
 }

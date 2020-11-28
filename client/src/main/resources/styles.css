@@ -71,6 +71,74 @@
 .label-button:active {
   -fx-background-color: '#DCDADA';
 }
+.current-day {
+  -fx-background-color: '#F1F1F1';
+  -fx-transition: 600ms;
+  -fx-background-radius: 0;
+  -fx-background-color: '#FFFFFF';
+  -fx-padding: 10;
+  -fx-padding: 5;
+  -fx-border-width: 1;
+  -fx-border-color: '#F1F1F1';
+  -fx-background-color: '#848484';
+  -fx-text-fill: '#FFFFFF';
+}
+.current-day:hover {
+  -fx-background-color: '#2483FF';
+  -fx-cursor: hand;
+  -fx-text-fill: '#FFFFFF';
+}
+.current-day:pressed {
+  -fx-background-color: '#1D68CB';
+}
+.current-day:active {
+  -fx-background-color: '#DCDADA';
+}
+.current-day {
+  -fx-background-color: '#F1F1F1';
+  -fx-transition: 600ms;
+  -fx-background-radius: 0;
+  -fx-background-color: '#FFFFFF';
+  -fx-padding: 10;
+  -fx-padding: 5;
+  -fx-border-width: 1;
+  -fx-border-color: '#F1F1F1';
+  -fx-background-color: '#848484';
+  -fx-text-fill: '#FFFFFF';
+}
+.current-day:hover {
+  -fx-background-color: '#2483FF';
+  -fx-cursor: hand;
+  -fx-text-fill: '#FFFFFF';
+}
+.current-day:pressed {
+  -fx-background-color: '#1D68CB';
+}
+.current-day:active {
+  -fx-background-color: '#DCDADA';
+}
+.event-day {
+  -fx-background-color: '#F1F1F1';
+  -fx-transition: 600ms;
+  -fx-background-radius: 0;
+  -fx-background-color: '#FFFFFF';
+  -fx-padding: 10;
+  -fx-padding: 5;
+  -fx-border-width: 1;
+  -fx-border-color: '#F1F1F1';
+  -fx-text-fill: '#2483FF';
+}
+.event-day:hover {
+  -fx-background-color: '#2483FF';
+  -fx-cursor: hand;
+  -fx-text-fill: '#FFFFFF';
+}
+.event-day:pressed {
+  -fx-background-color: '#1D68CB';
+}
+.event-day:active {
+  -fx-background-color: '#DCDADA';
+}
 #btn-agregar {
   -fx-background-color: '#2483FF';
   -fx-text-fill: '#FFFFFF';

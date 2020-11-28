@@ -14,8 +14,10 @@ import javafx.stage.Stage;
 public class MainUI extends Application {
 
     private StackPane stack = new StackPane();
+    private BorderPane root = new BorderPane();    
+    public Navigation n = new Navigation();
+    private MainView mv = new MainView(n);
 
-    private BorderPane root = new BorderPane();
 
     @Override
     public void start(Stage stage) {
@@ -32,8 +34,7 @@ public class MainUI extends Application {
         s.getStylesheets().clear();
         s.getStylesheets().add(css);
 
-        Navigation n = new Navigation();
-        MainView mv = new MainView();
+        
 
         //root.setMaxWidth(Double.MAX_VALUE);
 

@@ -5,12 +5,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.MonthDay;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import donotforget.commons.Categoria;
+import donotforget.commons.DayContainer;
 import donotforget.commons.Evento;
 import donotforget.remote.Eventos;
 import donotforget.wrappers.DatabaseWrapper;
@@ -29,17 +34,13 @@ public class EventsServer implements Eventos {
 
             Statement s = c.createStatement();
             ResultSet rs = s.executeQuery("SELECT * FROM Evento");
-            
+
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-            while(rs.next()) {
-                eventos.add(new Evento(
-                    rs.getInt("id_evento"), 
-                    rs.getString("titulo"),
-                    rs.getString("descripcion"),
-                    LocalDateTime.parse(rs.getString("fecha_inicio"), formatter),
-                    LocalDateTime.parse(rs.getString("fecha_finalizacion"), formatter)
-                ));
+            while (rs.next()) {
+                eventos.add(new Evento(rs.getInt("id_evento"), rs.getString("titulo"), rs.getString("descripcion"),
+                        LocalDateTime.parse(rs.getString("fecha_inicio"), formatter),
+                        LocalDateTime.parse(rs.getString("fecha_finalizacion"), formatter)));
             }
 
             rs.close();
@@ -68,17 +69,19 @@ public class EventsServer implements Eventos {
         try {
             DatabaseWrapper d = new DatabaseWrapper();
             Connection c = d.connect();
-            PreparedStatement s = c.prepareStatement("INSERT INTO Evento (id_categoria, titulo, descripcion, fecha_inicio, fecha_finalizacion, tiempo_aviso_previo) VALUES (?, ?, ?, ?, ?, null)");
+            PreparedStatement s = c.prepareStatement(
+                    "INSERT INTO Evento (id_categoria, titulo, descripcion, fecha_inicio, fecha_finalizacion, tiempo_aviso_previo) VALUES (?, ?, ?, ?, ?, null)");
             s.setInt(1, e.getCategoria());
             s.setString(2, e.getTitulo());
             s.setString(3, e.getDescripcion());
             s.setString(4, e.getFechaInicio().format(DateTimeFormatter.ISO_DATE_TIME));
             s.setString(5, e.getFechaFinalizacion().format(DateTimeFormatter.ISO_DATE_TIME));
-            // s.setString(6, e.getTiempoAvisoPrevio().format(DateTimeFormatter.ISO_DATE_TIME));
-
+            // s.setString(6,
+            // e.getTiempoAvisoPrevio().format(DateTimeFormatter.ISO_DATE_TIME));
             s.executeUpdate();
             s.close();
             d.disconnect();
+            return true;
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -90,6 +93,91 @@ public class EventsServer implements Eventos {
     public boolean removeEvent(int id) throws RemoteException {
         // TODO Auto-generated method stub
         return false;
+    }
+
+    @Override
+    public List<Evento> getEventsFromMonth(LocalDate month, List<Categoria> categorias) throws RemoteException {
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat();
+            DatabaseWrapper d = new DatabaseWrapper();
+            Connection c = d.connect();
+            String sqlStatement = "SELECT * FROM Evento WHERE id_categoria in (";
+            for (int i = 0; i < categorias.size(); i++) {
+                if (i > 0) {
+                    sqlStatement += ", ";
+                }
+                sqlStatement += categorias.get(i).getId();
+            }
+            sqlStatement += ") AND fecha_inicio LIKE \"" + month.getYear() + "-" +
+                String.format("%02d", month.getMonthValue()) + "%\";";
+            // Esto (^) extrae los eventos de las categorias seleccionadas.
+            // System.out.println(sqlStatement);
+            PreparedStatement s = c.prepareStatement(
+                sqlStatement                
+            );
+            ResultSet rs = s.executeQuery();
+            List<Evento> dias = new ArrayList<Evento>();
+            
+            while (rs.next()) {
+                dias.add(
+                    new Evento(
+                        rs.getInt("id_categoria"), 
+                        rs.getString("titulo"), 
+                        rs.getString("descripcion"),
+                        LocalDateTime.parse(rs.getString("fecha_inicio")),
+                        LocalDateTime.parse(rs.getString("fecha_finalizacion"))
+                    )
+                );
+            }
+            s.close();
+            d.disconnect();
+            return dias;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Evento> getEventsFromDay(LocalDate day, List<Categoria> categorias) throws RemoteException {
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat();
+            DatabaseWrapper d = new DatabaseWrapper();
+            Connection c = d.connect();
+            String sqlStatement = "SELECT * FROM Evento WHERE id_categoria in (";
+            for (int i = 0; i < categorias.size(); i++) {
+                if (i > 0) {
+                    sqlStatement += ", ";
+                }
+                sqlStatement += categorias.get(i).getId();
+            }
+            sqlStatement += ") AND fecha_inicio LIKE \"" + "______%" + "-" + String.format("%02d", day.getMonthValue())  + "\";";
+            // Esto (^) extrae los eventos de las categorias seleccionadas.
+            System.out.println(sqlStatement);
+            PreparedStatement s = c.prepareStatement(
+                sqlStatement                
+            );
+            ResultSet rs = s.executeQuery();
+            List<Evento> dias = new ArrayList<Evento>();
+            
+            while (rs.next()) {
+                dias.add(
+                    new Evento(
+                        rs.getInt("id_categoria"), 
+                        rs.getString("titulo"), 
+                        rs.getString("descripcion"),
+                        LocalDateTime.parse(rs.getString("fecha_inicio")),
+                        LocalDateTime.parse(rs.getString("fecha_finalizacion"))
+                    )
+                );
+            }
+            s.close();
+            d.disconnect();
+            return dias;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
     
 }
