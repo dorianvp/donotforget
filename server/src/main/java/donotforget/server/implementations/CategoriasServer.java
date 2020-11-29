@@ -90,13 +90,29 @@ public class CategoriasServer implements Categorias {
     // TODOOOOOOO
     public boolean removeCategoria(int id) {
         try {
-            DatabaseWrapper dw = new DatabaseWrapper();
-            Connection c = dw.connect();
-            // TODO: remove all linked rows.
-            // PreparedStatement p = c.prepareStatement("DELETE")
+            DatabaseWrapper d = new DatabaseWrapper();
+            Connection c = d.connect();
+            String sqlStatement = "DELETE FROM Categoria where id_categoria = ?";
+            String sqlStatement2 = "DELETE FROM Evento where id_categoria = ?";
+
+            PreparedStatement p = c.prepareStatement(sqlStatement);
+            PreparedStatement p2 = c.prepareStatement(sqlStatement2);
+            
+            p.setInt(1, id);
+            p2.setInt(1, id);
+
+            System.out.println("Borrando: " + id);
+
+            p.executeUpdate();
+            p.close();
+            p2.executeUpdate();
+            p2.close();
+
+            c.close();
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
-        return false;
     }
 }

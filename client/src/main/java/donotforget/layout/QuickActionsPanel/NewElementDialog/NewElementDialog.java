@@ -16,6 +16,7 @@ import com.jfoenix.controls.JFXButton.ButtonType;
 import donotforget.ServerWrapper.ServerWrapper;
 import donotforget.commons.Categoria;
 import donotforget.commons.Evento;
+import donotforget.layout.MainViewPanels.DetailsPanel.MainGrid.MainGrid;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -49,12 +50,13 @@ public class NewElementDialog extends JFXDialog {
     private Label lblHasta = new Label("Hasta: ");
 
     private StackPane container;
-    
-    public NewElementDialog(StackPane container, DialogTransition content) {
+    private MainGrid updater;
+
+    public NewElementDialog(StackPane container, DialogTransition content, MainGrid updater) {
         super(container, null, content, false);
 
         this.container = container;
-
+        this.updater = updater;
         this.setDialogContainer(container);
         this.setTransitionType(JFXDialog.DialogTransition.CENTER);
         this.setContent(this.layout);
@@ -99,6 +101,8 @@ public class NewElementDialog extends JFXDialog {
                         DialogTransition.CENTER
                     );
                     dlgError.show();
+                } else {
+                    NewElementDialog.this.updater.updateGrid();
                 };
                 NewElementDialog.this.close();
             }

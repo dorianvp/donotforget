@@ -91,15 +91,31 @@ public class EventsServer implements Eventos {
 
     @Override
     public boolean removeEvent(int id) throws RemoteException {
-        // TODO Auto-generated method stub
-        return false;
+        try {
+            DatabaseWrapper d = new DatabaseWrapper();
+            Connection c = d.connect();
+            String sqlStatement = "DELETE FROM Evento where id_evento = ?";
+            PreparedStatement p = c.prepareStatement(sqlStatement);
+            
+            p.setInt(1, id);
+
+            System.out.println("Borrando: " + id);
+
+            p.executeUpdate();
+
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public List<Evento> getEventsFromMonth(LocalDate month, List<Categoria> categorias) throws RemoteException {
         try {
-            SimpleDateFormat formatter = new SimpleDateFormat();
             DatabaseWrapper d = new DatabaseWrapper();
+            System.out.println("Tamaño: " + categorias.size());
             Connection c = d.connect();
             String sqlStatement = "SELECT * FROM Evento WHERE id_categoria in (";
             for (int i = 0; i < categorias.size(); i++) {
@@ -111,10 +127,10 @@ public class EventsServer implements Eventos {
             sqlStatement += ") AND fecha_inicio LIKE \"" + month.getYear() + "-" +
                 String.format("%02d", month.getMonthValue()) + "%\";";
             // Esto (^) extrae los eventos de las categorias seleccionadas.
-            // System.out.println(sqlStatement);
             PreparedStatement s = c.prepareStatement(
                 sqlStatement                
             );
+
             ResultSet rs = s.executeQuery();
             List<Evento> dias = new ArrayList<Evento>();
             
@@ -141,7 +157,6 @@ public class EventsServer implements Eventos {
     @Override
     public List<Evento> getEventsFromDay(LocalDate day, List<Categoria> categorias) throws RemoteException {
         try {
-            SimpleDateFormat formatter = new SimpleDateFormat();
             DatabaseWrapper d = new DatabaseWrapper();
             Connection c = d.connect();
             String sqlStatement = "SELECT * FROM Evento WHERE id_categoria in (";
@@ -151,18 +166,20 @@ public class EventsServer implements Eventos {
                 }
                 sqlStatement += categorias.get(i).getId();
             }
-            sqlStatement += ") AND fecha_inicio LIKE \"" + "______%" + "-" + String.format("%02d", day.getMonthValue())  + "\";";
+            sqlStatement += ") AND fecha_inicio LIKE \"" + "%" + "-" + String.format("%02d", day.getMonthValue()) 
+                + "-" + String.format("%02d", day.getDayOfMonth()) + "%\";";
             // Esto (^) extrae los eventos de las categorias seleccionadas.
-            System.out.println(sqlStatement);
             PreparedStatement s = c.prepareStatement(
                 sqlStatement                
             );
+            
             ResultSet rs = s.executeQuery();
             List<Evento> dias = new ArrayList<Evento>();
             
             while (rs.next()) {
                 dias.add(
                     new Evento(
+                        rs.getInt("id_evento"),
                         rs.getInt("id_categoria"), 
                         rs.getString("titulo"), 
                         rs.getString("descripcion"),

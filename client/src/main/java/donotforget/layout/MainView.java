@@ -17,11 +17,11 @@ public class MainView extends GridPane {
     public MainGrid mg;
     public LocalDateTime navigationDate = LocalDateTime.now();
 
-    public MainView(Navigation n) {
+    public MainView(/* Navigation n */) {
         super();
         this.setMaxWidth(Double.MAX_VALUE);
 
-        this.mg = new MainGrid(this, n);
+        this.mg = new MainGrid(this);
         this.header = new HeaderBar(this);
 
         this.setMinHeight(100);

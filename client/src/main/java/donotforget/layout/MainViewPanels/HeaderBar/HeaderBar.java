@@ -15,7 +15,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 
 public class HeaderBar extends GridPane {
-    private CalendarButton btnConfig = new CalendarButton("O", "white-button");
+    private CalendarButton btnConfig = new CalendarButton("Configuración", "white-button");
 
     private NavigationButtons nav;
     private ScaleButtons sv = new ScaleButtons();

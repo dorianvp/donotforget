@@ -15,12 +15,21 @@ public class MainUI extends Application {
 
     private StackPane stack = new StackPane();
     private BorderPane root = new BorderPane();    
-    public Navigation n = new Navigation();
-    private MainView mv = new MainView(n);
+    public Navigation n;
+    private MainView mv;
 
 
     @Override
     public void start(Stage stage) {
+
+        this.n = new Navigation();
+        this.mv = new MainView();
+        
+        this.mv.mg.setCategoryController(this.n);
+        
+
+        this.n.setGridUpdater(this.mv.mg);
+        this.mv.mg.updateGrid();
 
         Rectangle2D r = Screen.getPrimary().getBounds();
 

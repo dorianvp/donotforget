@@ -39,6 +39,17 @@ public class ServerWrapper {
         }
     }
 
+    public boolean removeCategoria(int id) {
+        try {
+            this.reg = LocateRegistry.getRegistry(null);
+            Categorias eventsStub = (Categorias) reg.lookup("categorias-server");
+            return eventsStub.removeCategoria(id);
+        } catch(Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public boolean addEvent(Evento e) {
         try {
             this.reg = LocateRegistry.getRegistry(null);
@@ -62,6 +73,28 @@ public class ServerWrapper {
         } catch(Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public List<Evento> getEventsFromDay(LocalDate day, List<Categoria> categorias) {
+        try {
+            this.reg = LocateRegistry.getRegistry(null);
+            Eventos eventsStub = (Eventos) reg.lookup("events-server");
+            return eventsStub.getEventsFromDay(day, categorias);
+        } catch(Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public boolean removeEvent(int id) {
+        try {
+            this.reg = LocateRegistry.getRegistry(null);
+            Eventos eventsStub = (Eventos) reg.lookup("events-server");
+            return eventsStub.removeEvent(id);
+        } catch(Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }

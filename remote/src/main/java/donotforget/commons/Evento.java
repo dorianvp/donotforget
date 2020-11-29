@@ -22,6 +22,11 @@ public class Evento implements Serializable {
         this.fecha_finalizacion = f;
     }
 
+    public Evento(int id, int c, String t, String d, LocalDateTime i, LocalDateTime f) {
+        this(c, t, d, i, f);
+        this.id_evento = id;
+    }
+
     public int getId_evento() {
         return id_evento;
     }

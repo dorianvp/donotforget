@@ -36,11 +36,11 @@ public class MainGrid extends GridPane {
     private MainView parent = null;
     private Navigation categoryController;
 
-    public MainGrid(MainView mv, Navigation n) {
+    public MainGrid(MainView mv/* , Navigation n */) {
         this();
         this.parent = mv;
-        this.categoryController = n;
-        this.updateGrid();
+        // this.setCategoryController(n);
+        //this.updateGrid();
     }
 
     public MainGrid() {
@@ -114,65 +114,79 @@ public class MainGrid extends GridPane {
             this.parent.navigationDate.toLocalDate(), 
             c
         );
-
-        for (Evento evento : e) {
-            System.out.println(evento.getCategoria());
-            System.out.println(evento.getTitulo());
-            System.out.println(evento.getDescripcion());
-        }
         // Esto (^) extrae las categorias seleccionadas y trae los eventos necesarios.
 
         for (CalendarButton[] b : this.labels) {
             for (CalendarButton cb : b) {
                 cb.setText("");
-                cb.setOnAction(new EventHandler<ActionEvent>(){
-                    @Override
-                    public void handle(ActionEvent event){
-                        // TODO: show dialog with list of events
-                        // System.out.println(MainGrid.this.getParent().getParent().getParent().toString());
-                        DayDialog d = new DayDialog(
-                            (StackPane) MainGrid.this.getParent().getParent().getParent(),
-                            DialogTransition.CENTER
-                        );
-                        d.show();
-                        // ServerWrapper sw = new ServerWrapper();
-                        // if (!sw.addEvent(e)) {
-                        //     JFXDialog dlgError = new JFXDialog(
-                        //         NewElementDialog.this.container, 
-                        //         new Label("Se produjo un error al agregar el elemento indicado."),
-                        //         DialogTransition.CENTER
-                        //     );
-                        //     dlgError.show();
-                        // };
-                        // NewElementDialog.this.close();
-                    }
-                });
+                if (cb.getDay() > 0) {
+                    cb.setOnAction(new EventHandler<ActionEvent>(){
+                        @Override
+                        public void handle(ActionEvent event){
+                            // TODO: show dialog with list of events
+                            // System.out.println(MainGrid.this.getParent().getParent().getParent().toString());
+                            DayDialog d = new DayDialog(
+                                (StackPane) MainGrid.this.getParent().getParent().getParent(),
+                                DialogTransition.CENTER,
+                                MainGrid.this.categoryController,
+                                MainGrid.this,
+                                cb.getDay()
+                            );
+                            d.show();
+                            // ServerWrapper sw = new ServerWrapper();
+                            // if (!sw.addEvent(e)) {
+                            //     JFXDialog dlgError = new JFXDialog(
+                            //         NewElementDialog.this.container, 
+                            //         new Label("Se produjo un error al agregar el elemento indicado."),
+                            //         DialogTransition.CENTER
+                            //     );
+                            //     dlgError.show();
+                            // };
+                            // NewElementDialog.this.close();
+                        }
+                    });
+                }
+                
             }
         }
         GregorianCalendar g = new GregorianCalendar();
         for (int y = 0; y < 6; y++) { 
             for (int x = 0; x < 7; x++) {
-                labels[x][y].getStyleClass().removeIf(style -> style.equals("current-day"));
-                labels[x][y].getStyleClass().removeIf(style -> style.equals("event-day"));
+                
+                labels[x][y].getStyleClass().removeIf(item -> item.equals("event-day"));
+                labels[x][y].getStyleClass().removeIf(item -> item.equals("current-day"));
+                
+                // labels[x][y].getStyleClass().removeIf(item -> item.equals("label-button"));
+
+
+                for (int i = 0; i < labels[x][y].getStyleClass().size(); i++) {
+                    
+                    if (
+                        labels[x][y].getStyleClass().get(i) == "event-day"
+                        ) {
+                            labels[x][y].getStyleClass().remove(i);
+                    }
+                }
                 if (counter > parent.navigationDate.getMonth().length(g.isLeapYear(parent.navigationDate.getYear()))) { 
 
                 } else {
                     if (y == 0 && x == 0) {
                         x = parent.navigationDate.withDayOfMonth(1).getDayOfWeek().getValue() - 1;
                     }                    
-                    // parent.navigationDate.withDayOfMonth(1).getDayOfWeek().getValue();
                     int eventCount = 0;
                     for (int j = 0; j < e.size(); j++) {
                         if (e.get(j).getFechaInicio().getDayOfMonth() == counter) {
                             eventCount++;
-                            System.out.println(eventCount);
                         }
                     }
                     if (eventCount > 0) {
                         labels[x][y].setText(String.valueOf(counter + " (" + eventCount + ")"));
+                        labels[x][y].getStyleClass().clear();
+                        labels[x][y].getStyleClass().add("label-button");
                         labels[x][y].getStyleClass().addAll("event-day");
                     } else {
                         labels[x][y].setText(String.valueOf(counter));
+                        labels[x][y].getStyleClass().removeIf(item -> item.equals("event-day"));
                     }
                     labels[x][y].setDay(counter);
                     if (
@@ -181,13 +195,27 @@ public class MainGrid extends GridPane {
                         && parent.navigationDate.getMonth() == LocalDate.now().getMonth())
                     {
                         labels[x][y].getStyleClass().addAll("current-day");
-                        // System.out.println(counter);
                     }
                 }
-                
                 counter++;
             }
             
         }
+    }
+
+    public MainView getMGParent() {
+        return parent;
+    }
+
+    public void setParent(MainView parent) {
+        this.parent = parent;
+    }
+
+    public Navigation getCategoryController() {
+        return categoryController;
+    }
+
+    public void setCategoryController(Navigation categoryController) {
+        this.categoryController = categoryController;
     }
 }
