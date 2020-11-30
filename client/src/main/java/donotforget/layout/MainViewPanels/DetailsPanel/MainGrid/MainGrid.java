@@ -84,63 +84,76 @@ public class MainGrid extends GridPane {
         this.setMaxHeight(Double.MAX_VALUE);
     }
     public void updateGrid() {
-        //System.out.println(parent.navigationDate.withDayOfMonth(1).getDayOfWeek().getValue());
         int counter = 1;
+        List<Evento> e = new ArrayList<Evento>();
+        
+            
 
-        ServerWrapper sw = new ServerWrapper();
+            ServerWrapper sw = new ServerWrapper();
 
-        List<Object> categorias = Arrays.asList(this.categoryController
-        .getQa()
-        .getLv()
-        .lookupAll(".cell").toArray());
+            List<Object> categorias = Arrays.asList(this.categoryController
+            .getQa()
+            .getLv()
+            .lookupAll(".cell").toArray());
 
-        ArrayList<Categoria> c = new ArrayList<Categoria>();
+            ArrayList<Categoria> c = new ArrayList<Categoria>();
 
-        for (Object categoria : categorias) {
-            if (((CategoryCell) categoria).getCb().isSelected()) {
-                System.out.println(((CategoryCell) categoria).getLastItem().toString());
-                c.add(((CategoryCell) categoria).getLastItem());
-            }
-        }
-
-        List<Evento> e = sw.getEventsFromMonth(
-            this.parent.navigationDate.toLocalDate(), 
-            c
-        );
-        // Esto (^) extrae las categorias seleccionadas y trae los eventos necesarios.
-
-        for (CalendarButton[] b : this.labels) {
-            for (CalendarButton cb : b) {
-                cb.setText("");
-                if (cb.getDay() > 0) {
-                    cb.setOnAction(new EventHandler<ActionEvent>(){
-                        @Override
-                        public void handle(ActionEvent event){
-                            // TODO: show dialog with list of events
-                            // System.out.println(MainGrid.this.getParent().getParent().getParent().toString());
-                            DayDialog d = new DayDialog(
-                                (StackPane) MainGrid.this.getParent().getParent().getParent(),
-                                DialogTransition.CENTER,
-                                MainGrid.this.categoryController,
-                                MainGrid.this,
-                                cb.getDay()
-                            );
-                            d.show();
-                            // ServerWrapper sw = new ServerWrapper();
-                            // if (!sw.addEvent(e)) {
-                            //     JFXDialog dlgError = new JFXDialog(
-                            //         NewElementDialog.this.container, 
-                            //         new Label("Se produjo un error al agregar el elemento indicado."),
-                            //         DialogTransition.CENTER
-                            //     );
-                            //     dlgError.show();
-                            // };
-                            // NewElementDialog.this.close();
-                        }
-                    });
+        try {
+            for (Object categoria : categorias) {
+                //System.out.println(categoria.);
+                System.out.println("Cat: " + categoria.toString());
+                if (
+                    ((CategoryCell) categoria).getCb().isSelected()
+                    && ((CategoryCell) categoria).getLastItem() != null
+                ) {
+                    System.out.println(((CategoryCell) categoria).getLastItem().toString());
+                    c.add(((CategoryCell) categoria).getLastItem());
                 }
-                
             }
+
+            e = sw.getEventsFromMonth(
+                this.parent.navigationDate.toLocalDate(), 
+                c
+            );
+            // Esto (^) extrae las categorias seleccionadas y trae los eventos necesarios.
+
+            for (CalendarButton[] b : this.labels) {
+                for (CalendarButton cb : b) {
+                    cb.setText("");
+                    if (cb.getDay() > 0) {
+                        cb.setOnAction(new EventHandler<ActionEvent>(){
+                            @Override
+                            public void handle(ActionEvent event){
+                                // TODO: show dialog with list of events
+                                // System.out.println(MainGrid.this.getParent().getParent().getParent().toString());
+                                DayDialog d = new DayDialog(
+                                    (StackPane) MainGrid.this.getParent().getParent().getParent(),
+                                    DialogTransition.CENTER,
+                                    MainGrid.this.categoryController,
+                                    MainGrid.this,
+                                    cb.getDay()
+                                );
+                                d.show();
+                                // ServerWrapper sw = new ServerWrapper();
+                                // if (!sw.addEvent(e)) {
+                                //     JFXDialog dlgError = new JFXDialog(
+                                //         NewElementDialog.this.container, 
+                                //         new Label("Se produjo un error al agregar el elemento indicado."),
+                                //         DialogTransition.CENTER
+                                //     );
+                                //     dlgError.show();
+                                // };
+                                // NewElementDialog.this.close();
+                            }
+                        });
+                    }
+                    
+                }
+            }
+            
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         GregorianCalendar g = new GregorianCalendar();
         for (int y = 0; y < 6; y++) { 
@@ -194,6 +207,9 @@ public class MainGrid extends GridPane {
             }
             
         }
+        
+        //System.out.println(parent.navigationDate.withDayOfMonth(1).getDayOfWeek().getValue());
+        
     }
 
     public MainView getMGParent() {
