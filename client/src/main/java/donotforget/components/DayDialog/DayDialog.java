@@ -95,7 +95,10 @@ public class DayDialog extends JFXDialog {
         ArrayList<Categoria> c = new ArrayList<Categoria>();
 
         for (Object categoria : categorias) {
-            if (((CategoryCell) categoria).getCb().isSelected()) {
+            if (
+                ((CategoryCell) categoria).getCb().isSelected()
+                && ((CategoryCell) categoria).getLastItem() != null
+            ) {
                 System.out.println(((CategoryCell) categoria).getLastItem().toString());
                 c.add(((CategoryCell) categoria).getLastItem());
             }
