@@ -2,11 +2,9 @@ package donotforget.components.QAListView.internals;
 
 import donotforget.ServerWrapper.ServerWrapper;
 import donotforget.commons.Categoria;
-import donotforget.layout.MainView;
 import donotforget.layout.MainViewPanels.DetailsPanel.MainGrid.MainGrid;
 import donotforget.layout.QuickActionsPanel.QuickActions;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -68,7 +66,6 @@ public class CategoryCell extends ListCell<Categoria> {
             } else {
                 CategoryCell.this.cb.setSelected(false);
                 CategoryCell.this.categoryController.loadCategories();
-                // EventButtonCell.this.dialog.loadEventos();
                 CategoryCell.this.gridUpdater.updateGrid();
             }
         }

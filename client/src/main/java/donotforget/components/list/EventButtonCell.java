@@ -10,7 +10,6 @@ import donotforget.layout.Navigation;
 import donotforget.layout.MainViewPanels.DetailsPanel.MainGrid.MainGrid;
 import javafx.event.EventHandler;
 import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.TextAlignment;
@@ -22,7 +21,6 @@ public class EventButtonCell extends ListCell<Evento> {
     private Evento lastItem;
     private DayDialog dialog;
     private MainGrid updater;
-    private Navigation controller;
 
     public EventButtonCell(
             DayDialog dialog, 
@@ -31,7 +29,6 @@ public class EventButtonCell extends ListCell<Evento> {
         ) {
         super();
 
-        this.controller = c;
         this.dialog = dialog;
         this.updater = gridUpdater;
         this.btnDetails.addEventHandler(MouseEvent.MOUSE_CLICKED, onDetails);

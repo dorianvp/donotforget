@@ -1,6 +1,5 @@
 package donotforget.layout.MainViewPanels.DetailsPanel.MainGrid;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -8,16 +7,12 @@ import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-
 import com.jfoenix.controls.JFXDialog.DialogTransition;
 
 import donotforget.ServerWrapper.ServerWrapper;
 import donotforget.commons.Categoria;
 import donotforget.commons.Evento;
 import donotforget.components.Button.CalendarButton;
-import donotforget.components.CalendarLabel.CalendarLabel;
 import donotforget.components.DayDialog.DayDialog;
 import donotforget.components.QAListView.internals.CategoryCell;
 import donotforget.layout.MainView;
@@ -25,11 +20,9 @@ import donotforget.layout.Navigation;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 
 public class MainGrid extends GridPane {
     public CalendarButton[][] labels = new CalendarButton[7][6];

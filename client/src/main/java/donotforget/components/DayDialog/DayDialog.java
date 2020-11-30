@@ -27,7 +27,7 @@ public class DayDialog extends JFXDialog {
     private JFXDialogLayout layout = new JFXDialogLayout();
     private JFXButton btnCancelar = new JFXButton("Cancelar");
     private ListView<Evento> lista = new ListView<Evento>();
-    private StackPane container;
+    // private StackPane container;
     private VBox contentLayout = new VBox();
     private Navigation categoryController; 
     private MainGrid parent;
@@ -42,7 +42,7 @@ public class DayDialog extends JFXDialog {
             ) {
         super(container, null, transition, false);
 
-        this.container = container;
+        // this.container = container;
         this.parent = parent;
         this.day = day;
         this.categoryController = categoryController;

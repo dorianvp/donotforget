@@ -1,7 +1,5 @@
 package donotforget.layout.QuickActionsPanel.TopPanel;
 
-import java.util.Optional;
-
 import donotforget.ServerWrapper.ServerWrapper;
 import donotforget.commons.Categoria;
 import donotforget.components.Button.CalendarButton;
@@ -11,18 +9,13 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.StageStyle;
 
 public class TopPanel extends BorderPane {
@@ -39,8 +32,6 @@ public class TopPanel extends BorderPane {
             d.initStyle(StageStyle.UTILITY);
 
             // TODO: Agregar estilos al dialogo.
-
-            
             d.getDialogPane().setPadding(new Insets(20, 20, 20, 20));
             
             // String css = this.getClass().getClassLoader().getResource("styles.css").toExternalForm();
@@ -64,19 +55,16 @@ public class TopPanel extends BorderPane {
             HBox h = new HBox();
             h.setSpacing(10);
             TextField nombre = new TextField();
-            ComboBox c = new ComboBox();
             // c.getItems().addAll("c", "asdasd","asdasd");
 
-            h.getChildren().addAll(nombre, c);
+            h.getChildren().addAll(nombre);
 
             
             nombre.setPromptText("Nombre de Categoría");
             l.getChildren().add(h);
 
             d.getDialogPane().setContent(l);
-
             // converter
-
             d.setResultConverter(dialog -> {
                 if (dialog == btnAccept) {
                     return (nombre.getText());
@@ -99,10 +87,7 @@ public class TopPanel extends BorderPane {
                 }
             });
 
-            d.showAndWait();
-
-
-            
+            d.showAndWait(); 
         }
     };
 
@@ -125,7 +110,5 @@ public class TopPanel extends BorderPane {
         this.btnAddCategoria.setMaxHeight(Double.MAX_VALUE);
         
         this.btnAddCategoria.setOnAction(this.onAdd);
-
-        
     }
 }
