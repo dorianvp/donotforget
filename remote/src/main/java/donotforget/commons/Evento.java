@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class Evento implements Serializable {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
     private int id_evento;
     private int id_categoria;
     private String titulo;
@@ -14,13 +14,17 @@ public class Evento implements Serializable {
     private LocalDateTime fecha_finalizacion;
     private LocalTime tiempo_aviso_previo;
 
-    public Evento(int c, String t, String d, LocalDateTime i, LocalDateTime f, LocalTime a) {
+    public Evento(int c, String t, String d, LocalDateTime i, LocalDateTime f) {
         this.id_categoria = c;
         this.titulo = t;
         this.descripcion = d;
         this.fecha_inicio = i;
         this.fecha_finalizacion = f;
-        this.tiempo_aviso_previo = a;
+    }
+
+    public Evento(int id, int c, String t, String d, LocalDateTime i, LocalDateTime f) {
+        this(c, t, d, i, f);
+        this.id_evento = id;
     }
 
     public int getId_evento() {

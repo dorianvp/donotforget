@@ -1,11 +1,9 @@
 package donotforget.layout.MainViewPanels.HeaderBar.ScaleButtons;
 
-import donotforget.components.Button.CalendarButton;
 import donotforget.components.Button.CalendarToggleButton;
 import javafx.collections.ListChangeListener;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;

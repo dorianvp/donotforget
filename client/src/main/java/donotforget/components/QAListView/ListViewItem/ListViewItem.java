@@ -1,11 +1,6 @@
 package donotforget.components.QAListView.ListViewItem;
 
 import donotforget.commons.Categoria;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.Property;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 
 public class ListViewItem {
     private Categoria c = null;

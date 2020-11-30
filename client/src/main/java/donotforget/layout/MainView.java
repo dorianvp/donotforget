@@ -17,7 +17,7 @@ public class MainView extends GridPane {
     public MainGrid mg;
     public LocalDateTime navigationDate = LocalDateTime.now();
 
-    public MainView() {
+    public MainView(/* Navigation n */) {
         super();
         this.setMaxWidth(Double.MAX_VALUE);
 

@@ -4,7 +4,6 @@ import donotforget.layout.MainViewPanels.DetailsPanel.DayBar.DayBar;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.RowConstraints;
 
 public class DetailsPanel extends GridPane {
     private DayBar days = new DayBar();

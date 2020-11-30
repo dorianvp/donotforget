@@ -5,6 +5,7 @@
     -fx-background-color: @grey;
     -fx-transition: 600ms;
     -fx-background-radius: 0;
+    -fx-text-fill: @black;
     &:hover {
         -fx-background-color: @blue;
         -fx-cursor: hand;
@@ -37,6 +38,17 @@
 .label-button {
     .white-button();
     .white-label();
+}
+
+.current-day {
+    .label-button();
+    -fx-background-color: @light-black;
+    -fx-text-fill: @white;
+}
+
+.event-day {
+    .label-button();
+    -fx-text-fill: @blue;
 }
 
 #btn-agregar {

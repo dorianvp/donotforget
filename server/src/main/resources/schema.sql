@@ -1,5 +1,6 @@
 -- Scripts para la creacion de la base de datos (tablas)
 PRAGMA encoding = "UTF-8"; 
+PRAGMA foreign_keys = ON;
 
 CREATE TABLE Categoria (
     id_categoria INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -21,6 +22,7 @@ CREATE TABLE Evento (
     tiempo_aviso_previo TEXT, 
     FOREIGN KEY (id_categoria)
         REFERENCES Categoria (id_categoria)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE Recordatorio (

@@ -4,18 +4,16 @@ import donotforget.components.Button.CalendarButton;
 import donotforget.layout.MainView;
 import donotforget.layout.MainViewPanels.HeaderBar.NavigationButtons.NavigationButtons;
 import donotforget.layout.MainViewPanels.HeaderBar.ScaleButtons.ScaleButtons;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
-import javafx.scene.control.Button;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 
 public class HeaderBar extends GridPane {
-    private CalendarButton btnConfig = new CalendarButton("O", "white-button");
+    private CalendarButton btnConfig = new CalendarButton("Configuración", "white-button");
 
     private NavigationButtons nav;
     private ScaleButtons sv = new ScaleButtons();
